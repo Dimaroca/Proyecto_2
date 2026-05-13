@@ -1,0 +1,24 @@
+2026.05.13 11:31:00 INFO  Started: Metals version 1.6.7 in folders 'C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2' for client Visual Studio Code 1.118.1.
+2026.05.13 11:31:00 INFO  Memory monitor started
+2026.05.13 11:31:01 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.05.13 11:31:01 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:03 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:08 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:08 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:08 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:08 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+may 13, 2026 11:31:09 A. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 11
+may 13, 2026 11:31:09 A. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12
+may 13, 2026 11:31:09 A. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13
+2026.05.13 11:31:08 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:10 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:11 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:13 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:31:13 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:34:13 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+2026.05.13 11:34:18 INFO  no build target found for C:\Users\Jair Morales\OneDrive - UVG\Escritorio\Progra2\Proyecto_2\Main.java. Using fallback presentation compiler.
+may 13, 2026 11:47:06 A. M. org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
