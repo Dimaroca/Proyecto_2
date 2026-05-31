@@ -1,11 +1,11 @@
 package services;
 
+import java.util.List;
+
 import algorithms.CalculadoraDePeso;
 import algorithms.Dijkstra;
 import models.Restaurant;
 import models.User;
-
-import java.util.List;
 
 public class RestaurantService {
 
@@ -15,7 +15,7 @@ public class RestaurantService {
     private Dijkstra dijkstra =
             new Dijkstra();
 
-    public void recommendRestaurants( List<Restaurant> restaurants, User user) {
+    public List<Restaurant> recommendRestaurants( List<Restaurant> restaurants, User user) {
         int size = restaurants.size() + 1;
 
         int[][] graph = new int[size][size];
@@ -53,6 +53,12 @@ public class RestaurantService {
                 affinity = 100 - distances[i];
             }
 
+            restaurant.setWeight(affinity);
+
         }
+
+        restaurants.sort((a,b) -> Integer.compare(b.getWeight(), a.getWeight()));
+
+    return restaurants;
     }
 }

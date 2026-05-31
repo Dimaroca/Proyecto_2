@@ -1,21 +1,28 @@
 package models;
 public class Restaurant {
 
+    private String id;
     private String name;
     private String category;
     private double rating;
+    private String city;
+    private String address;
     private int price;
-    private String zone;
-
+    private String description;
     private int weight;
 
-    public Restaurant(String name, String category, double rating, int price, String zone) {
-
+    public Restaurant(String id, String name, String category, double rating, String city, String address, int price) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.rating = rating;
+        this.city = city;
+        this.address = address;
         this.price = price;
-        this.zone = zone;
+    }
+
+    public String getID(){
+        return id;
     }
 
     public String getName() {
@@ -30,12 +37,12 @@ public class Restaurant {
         return rating;
     }
 
-    public int getPrice() {
-        return price;
+    public String getCity(){
+        return city;
     }
 
-    public String getZone() {
-        return zone;
+    public int getPrice() {
+        return price;
     }
 
     public int getWeight() {
