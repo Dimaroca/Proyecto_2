@@ -1,9 +1,14 @@
 package database;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.SessionConfig;
+
+import models.Restaurant;
 
 /**
  * Handles the connection between Java and Neo4j.
@@ -121,6 +126,48 @@ public class Neo4jManager implements AutoCloseable {
                 }]->(r)
             """);
         }
+    }
+
+    public List<Restaurant> getRestaurants() {
+
+        List<Restaurant> restaurants = new ArrayList<>();
+
+        try (Session session =
+                driver.session(
+                SessionConfig.forDatabase(databaseName))) {
+
+            var result = session.run("""
+
+                MATCH (r:Restaurant)
+
+                RETURN
+                r.id AS id,
+                r.nombre AS name,
+                r.cocina AS category,
+                r.rating AS rating,
+                r.ciudad AS city
+
+            """);
+
+            while(result.hasNext()) {
+
+                var row = result.next();
+
+                restaurants.add(
+                    new Restaurant(
+                        row.get("id").asString(),
+                        row.get("name").asString(),
+                        row.get("category").asString(),
+                        row.get("rating").asDouble(),
+                        row.get("city").asString(),
+                        "",
+                        0
+                    )
+                );
+            }
+        }
+
+        return restaurants;
     }
 
     /**
