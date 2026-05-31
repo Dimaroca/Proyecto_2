@@ -1,53 +1,65 @@
 package models;
+
 public class Restaurant {
 
+    private String id;
     private String name;
     private String category;
     private double rating;
     private int price;
     private String zone;
+    private String city;
+    private String image;
+    private String description;
+    private String environment;
+    private int score; // puntuación de afinidad calculada por Dijkstra
 
-    private int weight;
-
-    public Restaurant(String name, String category, double rating, int price, String zone) {
-
+    public Restaurant(String id, String name, String category, double rating, int price, String zone, String city, String image, String description,String environment) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.rating = rating;
         this.price = price;
         this.zone = zone;
+        this.city = city;
+        this.image = image;
+        this.description = description;
+        this.environment = environment;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getId(){ 
+        return id; }
 
-    public String getCategory() {
-        return category;
-    }
+    public String getName(){ 
+        return name; }
 
-    public double getRating() {
-        return rating;
-    }
+    public String getCategory(){
+         return category; }
 
-    public int getPrice() {
-        return price;
-    }
+    public double getRating(){
+         return rating; }
 
-    public String getZone() {
-        return zone;
-    }
+    public int    getPrice(){
+         return price; }
 
-    public int getWeight() {
-        return weight;
-    }
+    public String getZone(){
+         return zone; }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
+    public String getCity(){
+         return city; }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" + "name='" + name + '\'' + ", category='" + category + '\'' + ", rating=" + rating + ", price=" + price + ", zone='" + zone + '\'' + ", weight=" + weight +'}';
-    }
+    public String getImage(){
+         return image; }
+
+    public String getDescription(){
+         return description; }
+
+    public String getEnvironment(){
+         return environment; }
+
+    public int    getScore(){
+         return score; }
+
+    public void   setScore(int score){
+         this.score = score; }
 }
