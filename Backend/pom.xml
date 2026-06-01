@@ -17,14 +17,21 @@
 
     <dependencies>
 
-        
+        <!-- Neo4j Driver -->
         <dependency>
             <groupId>org.neo4j.driver</groupId>
             <artifactId>neo4j-java-driver</artifactId>
             <version>5.28.0</version>
         </dependency>
 
-        <!-- Gson -->
+        <!-- Spark Java (servidor HTTP) -->
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+
+        <!-- Gson (JSON) -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

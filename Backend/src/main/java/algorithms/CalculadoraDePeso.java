@@ -9,7 +9,7 @@ public class CalculadoraDePeso {
 
         int weight = 0;
 
-        // Comida favorita (category en Restaurant, favoriteFood en User)
+        // Tipo de comida
         if (restaurant.getCategory() != null && user.getFavoriteFood() != null) {
             if (restaurant.getCategory().toLowerCase()
                     .contains(user.getFavoriteFood().toLowerCase())) {
@@ -17,13 +17,13 @@ public class CalculadoraDePeso {
             }
         }
 
-        // Presupuesto: "bajo"=1, "medio"=2, "alto"=3 (price range de Neo4j es 1-4)
+        // Presupuesto: "bajo"=1, "medio"=2, "alto"=3
         int budgetLevel = budgetToLevel(user.getBudget());
         if (restaurant.getPrice() <= budgetLevel + 1) {
             weight += 25;
         }
 
-        // Rating mínimo aceptable: si restaurante tiene ≥ 4.0 suma puntos
+        // Rating
         if (restaurant.getRating() >= 4.0) {
             weight += 20;
         }
@@ -41,9 +41,10 @@ public class CalculadoraDePeso {
     private int budgetToLevel(String budget) {
         if (budget == null) return 2;
         return switch (budget.toLowerCase()) {
-            case "bajo"  -> 1;
-            case "alto"  -> 3;
-            default      -> 2; // medio
+            case "bajo" -> 1;
+            case "alto" -> 3;
+            default     -> 2;
         };
     }
 }
+

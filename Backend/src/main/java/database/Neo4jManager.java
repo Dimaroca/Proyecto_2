@@ -1,181 +1,179 @@
 package database;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.neo4j.driver.AuthTokens;
-import org.neo4j.driver.Driver;
-import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.Session;
-import org.neo4j.driver.SessionConfig;
 
 import models.Restaurant;
+import models.User;
+import org.neo4j.driver.*;
+import org.neo4j.driver.Record;
 
-/**
- * Handles the connection between Java and Neo4j.
- * Also manages dataset loading and graph generation.
- */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+
 public class Neo4jManager implements AutoCloseable {
 
-    /**
-     * Neo4j driver instance.
-     */
     private final Driver driver;
-
-    /**
-     * Name of the Neo4j database.
-     */
     private final String databaseName = "restaurants";
 
-    /**
-     * Creates a Neo4jManager object using
-     * the provided connection credentials.
-     *
-     * @param uri Neo4j connection URI.
-     * @param user Database username.
-     * @param password Database password.
-     */
     public Neo4jManager(String uri, String user, String password) {
-
-        driver = GraphDatabase.driver(
-                uri,
-                AuthTokens.basic(user, password)
-        );
+        driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
     }
 
-    /**
-     * Tests if the connection to Neo4j works correctly.
-     *
-     * @return true if the connection succeeds,
-     * false otherwise.
-     */
     public boolean testConnection() {
-
-        try (Session session =
-                     driver.session(
-                             SessionConfig.forDatabase(databaseName))) {
-
-            String result = session.run(
-                            "RETURN 'OK' AS msg")
-                    .single()
-                    .get("msg")
-                    .asString();
-
+        try (Session session = session()) {
+            String result = session.run("RETURN 'OK' AS msg").single().get("msg").asString();
             return result.equals("OK");
-
         } catch (Exception e) {
-
-            System.out.println(
-                    "Error de conexión: "
-                            + e.getMessage());
-
+            System.out.println("Error de conexión: " + e.getMessage());
             return false;
         }
     }
 
-    /**
-     * Loads restaurant data from the CSV dataset
-     * and creates graph nodes and weighted relationships.
-     *
-     * Only the first 20 rows are loaded.
-     */
-    public void loadDataset() {
+    //  Usuarios
 
-        try (Session session =
-                     driver.session(
-                             SessionConfig.forDatabase(databaseName))) {
 
-            /*
-             * Deletes all existing nodes and relationships.
-             */
+    public User registerUser(User user) {
+        try (Session session = session()) {
+            // Verificar si ya existe
+            var exists = session.run("MATCH (u:Usuario {email: $email}) RETURN u", Values.parameters("email", user.getEmail()) );
+            if (exists.hasNext()) return null;
+
+            String newId = UUID.randomUUID().toString();
             session.run("""
-                MATCH (n)
-                DETACH DELETE n
-            """);
+                CREATE (u:Usuario {
+                    id:       $id,
+                    nombre:   $name,
+                    email:    $email,
+                    password: $password,
+                    ciudad:   $city
+                })
+                """,
+                Values.parameters(
+                    "id",       newId,
+                    "name",     user.getName(),
+                    "email",    user.getEmail(),
+                    "password", user.getPassword(),
+                    "city",     user.getCity()
+                )
+            );
+            user.setId(newId);
+            return user;
+        }
+    }
 
-            /*
-             * Loads restaurant data from the CSV file.
-             */
+    
+    public User loginUser(String email, String password) {
+        try (Session session = session()) {
+            var result = session.run(
+                "MATCH (u:Usuario {email: $email, password: $password}) RETURN u",
+                Values.parameters("email", email, "password", password)
+            );
+            if (!result.hasNext()) return null;
+
+            var node = result.single().get("u").asNode();
+            User user = new User(node.get("nombre").asString(), node.get("email").asString(), node.get("password").asString(), node.get("ciudad").asString());
+            user.setId(node.get("id").asString());
+            return user;
+        }
+    }
+
+    
+    public boolean savePreferences(String userId, String favoriteFood,
+                                   String budget, String environment) {
+        try (Session session = session()) {
+            session.run("""
+                MATCH (u:Usuario {id: $id})
+                SET u.favoriteFood = $food,
+                    u.budget       = $budget,
+                    u.environment  = $env
+                """,
+                Values.parameters(
+                    "id",     userId,
+                    "food",   favoriteFood,
+                    "budget", budget,
+                    "env",    environment
+                )
+            );
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    
+    public List<Restaurant> getAllRestaurants() {
+        try (Session session = session()) {
+            var result = session.run("MATCH (r:Restaurant) RETURN r");
+            List<Restaurant> list = new ArrayList<>();
+            while (result.hasNext()) {
+                list.add(mapRestaurant(result.next()));
+            }
+            return list;
+        }
+    }
+
+    
+    public List<Restaurant> getRestaurantsByCity(String city) {
+        try (Session session = session()) {
+            var result = session.run(
+                "MATCH (r:Restaurant {ciudad: $city}) RETURN r",
+                Values.parameters("city", city)
+            );
+            List<Restaurant> list = new ArrayList<>();
+            while (result.hasNext()) {
+                list.add(mapRestaurant(result.next()));
+            }
+            return list;
+        }
+    }
+
+    
+    public void loadDataset() {
+        try (Session session = session()) {
+            session.run("MATCH (n) DETACH DELETE n");
             session.run("""
                 LOAD CSV WITH HEADERS
                 FROM 'file:///restaurant.csv' AS row
-
                 WITH row LIMIT 20
-
                 CREATE (r:Restaurant {
-                    id: row.`Restaurant ID`,
-                    nombre: row.`Restaurant Name`,
-                    ciudad: row.City,
-                    cocina: row.Cuisines,
-                    rating: toFloat(row.`Aggregate rating`)
+                    id:          row.`Restaurant ID`,
+                    nombre:      row.`Restaurant Name`,
+                    ciudad:      row.City,
+                    cocina:      row.Cuisines,
+                    rating:      toFloat(row.`Aggregate rating`),
+                    precio:      toInteger(row.`Price range`),
+                    zona:        row.Locality,
+                    imagen:      '',
+                    descripcion: '',
+                    ambiente:    ''
                 })
-            """);
-
-            /*
-             * Creates a sample user node and
-             * weighted recommendation relationships.
-             */
-            session.run("""
-                MERGE (u:Usuario {nombre:'Mateo'})
-
-                WITH u
-
-                MATCH (r:Restaurant)
-
-                CREATE (u)-[:CALIFICO {
-                    peso: r.rating
-                }]->(r)
-            """);
+                """);
         }
     }
 
-    public List<Restaurant> getRestaurants() {
 
-        List<Restaurant> restaurants = new ArrayList<>();
-
-        try (Session session =
-                driver.session(
-                SessionConfig.forDatabase(databaseName))) {
-
-            var result = session.run("""
-
-                MATCH (r:Restaurant)
-
-                RETURN
-                r.id AS id,
-                r.nombre AS name,
-                r.cocina AS category,
-                r.rating AS rating,
-                r.ciudad AS city
-
-            """);
-
-            while(result.hasNext()) {
-
-                var row = result.next();
-
-                restaurants.add(
-                    new Restaurant(
-                        row.get("id").asString(),
-                        row.get("name").asString(),
-                        row.get("category").asString(),
-                        row.get("rating").asDouble(),
-                        row.get("city").asString(),
-                        "",
-                        0
-                    )
-                );
-            }
-        }
-
-        return restaurants;
+    private Session session() {
+        return driver.session(SessionConfig.forDatabase(databaseName));
     }
 
-    /**
-     * Closes the Neo4j driver connection.
-     */
+    private Restaurant mapRestaurant(Record record) {
+        var node = record.get("r").asNode();
+        return new Restaurant(
+            node.get("id").asString(""),
+            node.get("nombre").asString(""),
+            node.get("cocina").asString(""),
+            node.get("rating").asDouble(0),
+            node.get("precio").asInt(0),
+            node.get("zona").asString(""),
+            node.get("ciudad").asString(""),
+            node.get("imagen").asString(""),
+            node.get("descripcion").asString(""),
+            node.get("ambiente").asString("")
+        );
+    }
+
     @Override
     public void close() {
-
         driver.close();
     }
 }

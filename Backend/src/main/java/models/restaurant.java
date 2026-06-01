@@ -1,60 +1,65 @@
 package models;
+
 public class Restaurant {
 
     private String id;
     private String name;
     private String category;
     private double rating;
-    private String city;
-    private String address;
     private int price;
+    private String zone;
+    private String city;
+    private String image;
     private String description;
-    private int weight;
+    private String environment;
+    private int score; // puntuación de afinidad calculada por Dijkstra
 
-    public Restaurant(String id, String name, String category, double rating, String city, String address, int price) {
+    public Restaurant(String id, String name, String category, double rating, int price, String zone, String city, String image, String description,String environment) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.rating = rating;
-        this.city = city;
-        this.address = address;
         this.price = price;
+        this.zone = zone;
+        this.city = city;
+        this.image = image;
+        this.description = description;
+        this.environment = environment;
     }
 
-    public String getID(){
-        return id;
-    }
+    public String getId(){ 
+        return id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName(){ 
+        return name; }
 
-    public String getCategory() {
-        return category;
-    }
+    public String getCategory(){
+         return category; }
 
-    public double getRating() {
-        return rating;
-    }
+    public double getRating(){
+         return rating; }
+
+    public int    getPrice(){
+         return price; }
+
+    public String getZone(){
+         return zone; }
 
     public String getCity(){
-        return city;
-    }
+         return city; }
 
-    public int getPrice() {
-        return price;
-    }
+    public String getImage(){
+         return image; }
 
-    public int getWeight() {
-        return weight;
-    }
+    public String getDescription(){
+         return description; }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
+    public String getEnvironment(){
+         return environment; }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" + "name='" + name + '\'' + ", category='" + category + '\'' + ", rating=" + rating + ", price=" + price + ", zone='" + zone + '\'' + ", weight=" + weight +'}';
-    }
+    public int    getScore(){
+         return score; }
+
+    public void   setScore(int score){
+         this.score = score; }
 }
