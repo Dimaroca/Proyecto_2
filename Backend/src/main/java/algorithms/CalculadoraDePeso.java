@@ -30,6 +30,27 @@ public class CalculadoraDePeso {
             weight += 20;
         }
 
+        if(user.getReviewPreference()
+            >= 4){
+            if(
+                restaurant.getRating()
+                >= 4.5
+            ){
+                weight += 5;
+            }
+        }
+        else if(
+            user.getReviewPreference()
+            <= 2
+        ){
+            if(
+                restaurant.getRating()
+                < 4.0
+            ){
+                weight += 5;
+            }
+        }
+
         // Ambiente
         if (restaurant.getEnvironment() != null && user.getEnvironment() != null) {
             if (restaurant.getEnvironment().equalsIgnoreCase(user.getEnvironment())) {

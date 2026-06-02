@@ -66,8 +66,48 @@ public class Main {
 
             return gson.toJson(Map.of("message", "Registro exitoso.", "userId", newUser.getId(), "name", newUser.getName() ));});
 
-        
-        post("/api/login", (req, res) -> {
+        post("/api/review", (req, res) -> {
+
+            JsonObject body =
+                gson.fromJson(
+                    req.body(),
+                    JsonObject.class
+                );
+
+            String userId =
+                body.get("userId")
+                    .getAsString();
+
+            int rating =
+                body.get("rating")
+                    .getAsInt();
+
+            boolean ok =
+                neo4j.saveReviewPreference(
+                    userId,
+                    rating
+                );
+
+            if(!ok){
+
+                res.status(500);
+
+                return gson.toJson(
+                    Map.of(
+                        "error",
+                        "No se pudo guardar"
+                    )
+                );
+            }
+
+            return gson.toJson(
+                Map.of(
+                    "message",
+                    "Review guardada"
+                )
+            );
+        });
+                post("/api/login", (req, res) -> {
             JsonObject body = gson.fromJson(req.body(), JsonObject.class);
 
             String email = body.get("email").getAsString();

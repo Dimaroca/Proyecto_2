@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -14,58 +15,73 @@
 
 <main>
 
-    <div class="review-box">
+```
+<div class="review-box">
 
-        <h2>Califica tu experiencia</h2>
+    <h2>Califica tu experiencia</h2>
 
-        <h3>La Estancia</h3>
+    <h3 id="restaurantName">
+        Cargando restaurante...
+    </h3>
 
-        <form>
+    <form id="reviewForm">
 
-            <label>Calificación</label>
+        <label for="rating">
+            Calificación
+        </label>
 
-            <select>
-                <option>⭐ 1</option>
-                <option>⭐ 2</option>
-                <option>⭐ 3</option>
-                <option>⭐ 4</option>
-                <option>⭐ 5</option>
-            </select>
+        <select
+            id="rating"
+            required>
 
-            <label>Comentario</label>
+            <option value="">
+                Selecciona una calificación
+            </option>
 
-            <textarea rows="6"
-            placeholder="Describe tu experiencia"></textarea>
+            <option value="1">
+                ⭐ 1
+            </option>
 
-            <button type="submit">
-                Enviar reseña
-            </button>
+            <option value="2">
+                ⭐⭐ 2
+            </option>
 
-        </form>
+            <option value="3">
+                ⭐⭐⭐ 3
+            </option>
 
-        <div class="buttons">
-            <a id="backBtn">Regresar</a>
-        </div>
+            <option value="4">
+                ⭐⭐⭐⭐ 4
+            </option>
 
-    </div>
+            <option value="5">
+                ⭐⭐⭐⭐⭐ 5
+            </option>
+
+        </select>
+
+        <label for="comment">
+            Comentario
+        </label>
+
+        <textarea
+            id="comment"
+            rows="6"
+            placeholder="Describe tu experiencia">
+        </textarea>
+
+        <button type="submit">
+            Enviar reseña
+        </button>
+
+    </form>
+
+</div>
+```
 
 </main>
 
-<script>
-
-const params = new URLSearchParams(window.location.search);
-const from = params.get("from");
-
-const backBtn = document.getElementById("backBtn");
-
-if(from === "recommendation"){
-    backBtn.href = "recommendation.html";
-}
-else{
-    backBtn.href = "menu.html";
-}
-
-</script>
+<script src="../js/review.js"></script>
 
 </body>
 </html>

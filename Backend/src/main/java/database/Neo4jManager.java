@@ -79,6 +79,13 @@ public class Neo4jManager implements AutoCloseable {
             var node = result.single().get("u").asNode();
             User user = new User(node.get("nombre").asString(), node.get("email").asString(), node.get("password").asString(), node.get("ciudad").asString());
             user.setId(node.get("id").asString());
+
+            if (node.containsKey("reviewPreference")) {
+
+                user.setReviewPreference(
+                    node.get("reviewPreference").asInt()
+                );
+            }
             return user;
         }
     }
@@ -157,6 +164,33 @@ public class Neo4jManager implements AutoCloseable {
                     ambiente:    ''
                 })
                 """);
+        }
+    }
+
+    public boolean saveReviewPreference(String userId, int rating) {
+
+        try(Session session = session()) {
+
+            session.run(
+                """
+                MATCH (u:Usuario {id:$id})
+                SET u.reviewPreference =
+                    $rating
+                """,
+                Values.parameters(
+                    "id",
+                    userId,
+
+                    "rating",
+                    rating
+                )
+            );
+
+            return true;
+
+        } catch(Exception e) {
+
+            return false;
         }
     }
 

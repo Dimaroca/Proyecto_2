@@ -12,6 +12,7 @@ public class User {
     private String environment;
     private double minRating;
     private String distance;
+    private int reviewPreference;
 
     public User(String name, String email, String password, String city) {
         this.name = name;
@@ -52,4 +53,8 @@ public class User {
     {return distance;}
     public void setDistance(String distance) 
     {this.distance = distance;}
+    public int getReviewPreference() 
+    {return reviewPreference;}
+    public void setReviewPreference(int reviewPreference) 
+    {this.reviewPreference = reviewPreference;}
 }
