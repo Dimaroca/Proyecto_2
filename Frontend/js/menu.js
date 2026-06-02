@@ -5,37 +5,55 @@ const recommendBtn = document.querySelector(".recommend-btn");
 
 // ── Cargar restaurantes desde el backend ──────────────────────────
 async function loadRestaurants() {
-    const city = sessionStorage.getItem("userCity") || "";
+
+    const city =
+        sessionStorage.getItem("userCity") || "";
 
     try {
+
         const url = city
             ? `http://localhost:4567/api/restaurantes?city=${encodeURIComponent(city)}`
             : "http://localhost:4567/api/restaurantes";
 
         const response = await fetch(url);
 
-        if (!response.ok) throw new Error("Error al obtener restaurantes.");
+        if (!response.ok)
+            throw new Error(
+                "Error al obtener restaurantes."
+            );
 
-        const restaurants = await response.json();
+        const restaurants =
+            await response.json();
 
-        // Limpiar cards estáticas del HTML y renderizar las del backend
+        const top10 = restaurants
+            .sort((a, b) => b.rating - a.rating)
+            .slice(0, 10);
+
         slider.innerHTML = "";
 
-        restaurants.forEach(r => {
-            const card = document.createElement("div");
-            card.className = "restaurant-card";
+        top10.forEach(r => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "restaurant-card";
+
             card.innerHTML = `
-                <img src="${r.image || '../assets/comida.jpg'}" alt="${r.name}">
                 <h3>${r.name}</h3>
                 <p>${r.category}</p>
                 <span>⭐ ${r.rating.toFixed(1)}</span>
             `;
+
             slider.appendChild(card);
         });
 
     } catch (error) {
-        console.error("No se pudo conectar con el servidor:", error);
-        // Si falla, las cards estáticas del HTML quedan visibles
+
+        console.error(
+            "No se pudo conectar con el servidor:",
+            error
+        );
     }
 }
 
