@@ -19,7 +19,7 @@ import models.User;
 public class Neo4jManager implements AutoCloseable {
 
     private final Driver driver;
-    private final String databaseName = "restaurants";
+    private final String databaseName = "neo4j";
 
     public Neo4jManager(String uri, String user, String password) {
         driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
@@ -149,7 +149,7 @@ public class Neo4jManager implements AutoCloseable {
             session.run("MATCH (n) DETACH DELETE n");
             session.run("""
                 LOAD CSV WITH HEADERS
-                FROM 'file:///restaurant.csv' AS row
+                FROM 'file:///restaurants.csv' AS row
                 WITH row LIMIT 300
                 CREATE (r:Restaurant {
                     id:          row.`Restaurant ID`,

@@ -1,0 +1,31 @@
+services:
+
+  neo4j:
+    image: neo4j:5
+    container_name: neo4j
+
+    environment:
+      NEO4J_AUTH: neo4j/12345678
+
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+
+    volumes:
+      - neo4j_data:/data
+      - ./Backend/src/main/resources:/var/lib/neo4j/import
+
+  backend:
+    build:
+      context: ./Backend
+
+    container_name: trophinder-api
+
+    ports:
+      - "4567:4567"
+
+    depends_on:
+      - neo4j
+
+volumes:
+  neo4j_data:

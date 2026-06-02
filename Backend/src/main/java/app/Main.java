@@ -21,14 +21,14 @@ public class Main {
     private static final Gson gson = new Gson();
 
     //Conexión Neo4j 
-    private static final String NEO4J_URI  = "neo4j://127.0.0.1:7687";
+    private static final String NEO4J_URI = "bolt://neo4j:7687";
     private static final String NEO4J_USER = "neo4j";
     private static final String NEO4J_PASS = "12345678";
 
     public static void main(String[] args) {
 
         Neo4jManager neo4j = new Neo4jManager(NEO4J_URI, NEO4J_USER, NEO4J_PASS);
-        neo4j.loadDataset();
+        //neo4j.loadDataset();
         System.out.println("Dataset cargado");
         RestaurantService service = new RestaurantService();
 
