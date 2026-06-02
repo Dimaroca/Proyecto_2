@@ -143,7 +143,7 @@ public class Neo4jManager implements AutoCloseable {
             session.run("""
                 LOAD CSV WITH HEADERS
                 FROM 'file:///restaurant.csv' AS row
-                WITH row LIMIT 20
+                WITH row LIMIT 300
                 CREATE (r:Restaurant {
                     id:          row.`Restaurant ID`,
                     nombre:      row.`Restaurant Name`,

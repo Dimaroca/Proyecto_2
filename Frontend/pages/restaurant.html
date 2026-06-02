@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -14,64 +15,87 @@
 
 <main>
 
-    <div class="restaurant-box">
+```
+<div class="restaurant-box">
 
-        <img src="../assets/estancia.png" alt="La Estancia">
+    <div class="restaurant-info">
 
-        <div class="restaurant-info">
+        <h2 id="restaurantName">
+            Cargando...
+        </h2>
 
-            <h2>La Estancia</h2>
+        <p
+            class="rating"
+            id="restaurantRating">
+        </p>
 
-            <p class="rating">⭐ 4.9</p>
+        <div class="details">
 
             <p>
-                Restaurante especializado en carnes y parrilladas.
-                Ambiente familiar, excelente servicio y cortes premium.
+                <strong>Categoría:</strong>
+                <span id="restaurantCategory">
+                    Cargando...
+                </span>
             </p>
 
-            <div class="details">
-                <p><strong>Dirección:</strong> Zona 10, Ciudad de Guatemala</p>
-                <p><strong>Horario:</strong> 11:00 AM - 10:00 PM</p>
-                <p><strong>Teléfono:</strong> +502 5555-5555</p>
-                <p><strong>Tipo:</strong> Parrillada</p>
-            </div>
+            <p>
+                <strong>Ciudad:</strong>
+                <span id="restaurantCity">
+                    Cargando...
+                </span>
+            </p>
 
-            <div class="buttons">
+            <p>
+                <strong>Zona:</strong>
+                <span id="restaurantZone">
+                    Cargando...
+                </span>
+            </p>
 
-                <a id="backBtn" class="btn">
-                    Regresar
-                </a>
+            <p>
+                <strong>Ambiente:</strong>
+                <span id="restaurantEnvironment">
+                    Cargando...
+                </span>
+            </p>
 
-                <a id="reviewBtn" class="btn">
-                    Calificar restaurante
-                </a>
+            <p>
+                <strong>Descripción:</strong>
+                <span id="restaurantDescription">
+                    Cargando...
+                </span>
+            </p>
 
-            </div>
+        </div>
+
+        <div class="buttons">
+
+            <a
+                id="backBtn"
+                class="btn">
+
+                Regresar
+
+            </a>
+
+            <a
+                id="reviewBtn"
+                class="btn">
+
+                Calificar restaurante
+
+            </a>
 
         </div>
 
     </div>
 
+</div>
+```
+
 </main>
 
-<script>
-
-const params = new URLSearchParams(window.location.search);
-const from = params.get("from");
-
-const backBtn = document.getElementById("backBtn");
-const reviewBtn = document.getElementById("reviewBtn");
-
-if(from === "recommendation"){
-    backBtn.href = "recommendation.html";
-    reviewBtn.href = "review.html?from=recommendation";
-}
-else{
-    backBtn.href = "menu.html";
-    reviewBtn.href = "review.html?from=menu";
-}
-
-</script>
+<script src="../js/restaurant.js"></script>
 
 </body>
 </html>
