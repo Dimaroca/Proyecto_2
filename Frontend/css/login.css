@@ -17,10 +17,20 @@ body{
     height:100vh;
 }
 
-.picture{
-    background:#FFFFFF;
-    width:55%;
-    background-image:url("../assets/comida.jpg");
+.nombre-container{
+    display:flex;
+    justify-content:center;
+}
+
+.nombre-container img{
+    width:300px;
+    height:auto;
+}
+
+.picture{ 
+    background:#F4E9D8;
+    width:40%;
+    background-image:url("../assets/login.png");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
@@ -32,16 +42,10 @@ h1{
 
 .card{
     background:#FFFFFF;
-    width:45%;
+    width:60%;
     justify-content: center;
     display: flex;
     align-items: center;
-}
-
-.card h1{
-    text-align:center;
-    color:#2563EB;
-    margin-bottom:10px;
 }
 
 .login{
@@ -52,13 +56,6 @@ h1{
     border-radius:15px;
     box-shadow:0 4px 15px rgba(0,0,0,0.15);
 }
-
-.subtitle{
-    text-align:center;
-    color:#6B7280;
-    margin-bottom:30px;
-}
-
 form{
     display:flex;
     flex-direction:column;
@@ -75,12 +72,12 @@ input{
 
 input:focus{
     outline:none;
-    border:2px solid #3B82F6;
+    border:2px solid #B85C38;
 }
 
 button{
-    background:#3B82F6;
-    color:white;
+    background:#B85C38;
+    color:#F4E9D8;
     border:none;
     padding:12px;
     border-radius:10px;
@@ -91,7 +88,7 @@ button{
 }
 
 button:hover{
-    background:#1D4ED8;
+    background:#D97742;
 }
 
 .register{
@@ -101,7 +98,7 @@ button:hover{
 }
 
 .register a{
-    color:#2563EB;
+    color:#B85C38;
     text-decoration:none;
     font-weight:bold;
 }

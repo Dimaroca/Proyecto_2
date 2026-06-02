@@ -28,6 +28,14 @@ public class Main {
     public static void main(String[] args) {
 
         Neo4jManager neo4j = new Neo4jManager(NEO4J_URI, NEO4J_USER, NEO4J_PASS);
+        /*try {
+
+            Thread.sleep(30000);
+
+        } catch (InterruptedException e) {
+
+            Thread.currentThread().interrupt();
+        }*/
         //neo4j.loadDataset();
         System.out.println("Dataset cargado");
         RestaurantService service = new RestaurantService();

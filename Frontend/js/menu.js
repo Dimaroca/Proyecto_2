@@ -1,80 +1,224 @@
-const slider      = document.getElementById("mainSlider");
-const prevBtn     = document.getElementById("prevBtn");
-const nextBtn     = document.getElementById("nextBtn");
-const recommendBtn = document.querySelector(".recommend-btn");
+const mainSlider =
+    document.getElementById("mainSlider");
 
-// ── Cargar restaurantes desde el backend ──────────────────────────
-async function loadRestaurants() {
+const citySlider =
+    document.getElementById("citySlider");
+
+const cityTitle =
+    document.getElementById("cityTitle");
+
+const recommendBtn =
+    document.querySelector(".recommend-btn");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+    function generateStars(rating){
+
+    const fullStars =
+        Math.round(rating);
+
+    return "★".repeat(fullStars) +
+           "☆".repeat(5-fullStars);
+}
+/* ==========================
+   CREAR TARJETA
+========================== */
+
+function createCard(r){
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "restaurant-card";
+
+    card.innerHTML = `
+
+        <div class="restaurant-name">
+            ${r.name}
+        </div>
+
+        <div class="restaurant-category">
+            ${r.category}
+        </div>
+
+        <div class="restaurant-rating">
+
+            ${generateStars(r.rating)}
+
+            <span class="rating-number">
+                ${r.rating.toFixed(1)}
+            </span>
+
+        </div>
+
+    `;
+
+    card.addEventListener("click", () => {
+
+        window.location.href =
+            `restaurant.html?id=${r.id}&from=menu`;
+
+    });
+
+    return card;
+}
+
+/* ==========================
+   CARGAR RESTAURANTES
+========================== */
+
+async function loadRestaurants(){
 
     const city =
         sessionStorage.getItem("userCity") || "";
 
-    try {
+    try{
 
-        const url = city
-            ? `http://localhost:4567/api/restaurantes?city=${encodeURIComponent(city)}`
-            : "http://localhost:4567/api/restaurantes";
-
-        const response = await fetch(url);
-
-        if (!response.ok)
-            throw new Error(
-                "Error al obtener restaurantes."
+        const response =
+            await fetch(
+                "http://localhost:4567/api/restaurantes"
             );
+
+        if(!response.ok){
+
+            throw new Error(
+                "Error obteniendo restaurantes"
+            );
+        }
 
         const restaurants =
             await response.json();
 
-        const top10 = restaurants
-            .sort((a, b) => b.rating - a.rating)
-            .slice(0, 10);
+        const top10 =
+            [...restaurants]
+            .sort((a,b)=>b.rating-a.rating)
+            .slice(0,10);
 
-        slider.innerHTML = "";
+        const cityRestaurants =
+            city
+            ? restaurants.filter(r =>
+
+                r.city &&
+                r.city.toLowerCase() ===
+                city.toLowerCase()
+
+            )
+            .slice(0,15)
+            : [];
+
+        if(city){
+
+            cityTitle.textContent =
+                `Restaurantes en ${city}`;
+        }
+
+        mainSlider.innerHTML = "";
+        citySlider.innerHTML = "";
 
         top10.forEach(r => {
 
-            const card =
-                document.createElement("div");
+            mainSlider.appendChild(
+                createCard(r)
+            );
 
-            card.className =
-                "restaurant-card";
-
-            card.innerHTML = `
-                <h3>${r.name}</h3>
-                <p>${r.category}</p>
-                <span>⭐ ${r.rating.toFixed(1)}</span>
-            `;
-
-            card.addEventListener("click", () => {
-
-                window.location.href =
-                    `restaurant.html?id=${r.id}&from=menu`;
-            });
-
-            slider.appendChild(card);
         });
 
-    } catch (error) {
+        cityRestaurants.forEach(r => {
 
-        console.error(
-            "No se pudo conectar con el servidor:",
-            error
-        );
+            citySlider.appendChild(
+                createCard(r)
+            );
+
+        });
+
+    }
+    catch(error){
+
+        console.error(error);
     }
 }
 
-// Navegación del slider 
-nextBtn.addEventListener("click", function () {
-    slider.appendChild(slider.firstElementChild);
+/* ==========================
+   TOP 10
+========================== */
+
+document
+.getElementById("nextBtn")
+.addEventListener("click", () => {
+
+    mainSlider.appendChild(
+        mainSlider.firstElementChild
+    );
+
 });
 
-prevBtn.addEventListener("click", function () {
-    slider.insertBefore(slider.lastElementChild, slider.firstElementChild);
+document
+.getElementById("prevBtn")
+.addEventListener("click", () => {
+
+    mainSlider.insertBefore(
+        mainSlider.lastElementChild,
+        mainSlider.firstElementChild
+    );
+
 });
 
-recommendBtn.addEventListener("click", function () {
-    window.location.href = "question.html";
+/* ==========================
+   CERCA DE TI
+========================== */
+
+document
+.getElementById("nextCityBtn")
+.addEventListener("click", () => {
+
+    citySlider.appendChild(
+        citySlider.firstElementChild
+    );
+
 });
 
-// Cargar al iniciar
+document
+.getElementById("prevCityBtn")
+.addEventListener("click", () => {
+
+    citySlider.insertBefore(
+        citySlider.lastElementChild,
+        citySlider.firstElementChild
+    );
+
+});
+
+/* ==========================
+   RECOMENDACIONES
+========================== */
+
+recommendBtn.addEventListener("click", () => {
+
+    window.location.href =
+        "question.html";
+
+});
+
+/* ==========================
+   CERRAR SESIÓN
+========================== */
+
+if(logoutBtn){
+
+    logoutBtn.addEventListener("click", () => {
+
+        sessionStorage.clear();
+
+        window.location.href =
+            "login.html";
+
+    });
+}
+
+/* ==========================
+   INICIO
+========================== */
+
 loadRestaurants();
