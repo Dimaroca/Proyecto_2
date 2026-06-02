@@ -35,13 +35,9 @@ public class Neo4jManager implements AutoCloseable {
         }
     }
 
-    //  Usuarios
-
-
     public User registerUser(User user) {
         try (Session session = session()) {
-            // Verificar si ya existe
-            var exists = session.run("MATCH (u:Usuario {email: $email}) RETURN u", Values.parameters("email", user.getEmail()) );
+            var exists = session.run("MATCH (u:Usuario {email: $email}) RETURN u", Values.parameters("email", user.getEmail()));
             if (exists.hasNext()) return null;
 
             String newId = UUID.randomUUID().toString();
@@ -67,7 +63,6 @@ public class Neo4jManager implements AutoCloseable {
         }
     }
 
-    
     public User loginUser(String email, String password) {
         try (Session session = session()) {
             var result = session.run(
@@ -80,17 +75,12 @@ public class Neo4jManager implements AutoCloseable {
             User user = new User(node.get("nombre").asString(), node.get("email").asString(), node.get("password").asString(), node.get("ciudad").asString());
             user.setId(node.get("id").asString());
 
-            if (node.containsKey("reviewPreference")) {
-
-                user.setReviewPreference(
-                    node.get("reviewPreference").asInt()
-                );
-            }
+            if (node.containsKey("reviewPreference"))
+                user.setReviewPreference(node.get("reviewPreference").asInt());
             return user;
         }
     }
 
-    
     public boolean savePreferences(String userId, String favoriteFood, String budget, String environment, double minRating, String distance) {
         try (Session session = session()) {
             session.run("""
@@ -102,11 +92,11 @@ public class Neo4jManager implements AutoCloseable {
                     u.distance     = $distance
                 """,
                 Values.parameters(
-                    "id",     userId,
-                    "food",   favoriteFood,
-                    "budget", budget,
-                    "env",    environment,
-                    "rating", minRating,
+                    "id",       userId,
+                    "food",     favoriteFood,
+                    "budget",   budget,
+                    "env",      environment,
+                    "rating",   minRating,
                     "distance", distance
                 )
             );
@@ -116,19 +106,15 @@ public class Neo4jManager implements AutoCloseable {
         }
     }
 
-    
     public List<Restaurant> getAllRestaurants() {
         try (Session session = session()) {
             var result = session.run("MATCH (r:Restaurant) RETURN r");
             List<Restaurant> list = new ArrayList<>();
-            while (result.hasNext()) {
-                list.add(mapRestaurant(result.next()));
-            }
+            while (result.hasNext()) list.add(mapRestaurant(result.next()));
             return list;
         }
     }
 
-    
     public List<Restaurant> getRestaurantsByCity(String city) {
         try (Session session = session()) {
             var result = session.run(
@@ -136,14 +122,11 @@ public class Neo4jManager implements AutoCloseable {
                 Values.parameters("city", city)
             );
             List<Restaurant> list = new ArrayList<>();
-            while (result.hasNext()) {
-                list.add(mapRestaurant(result.next()));
-            }
+            while (result.hasNext()) list.add(mapRestaurant(result.next()));
             return list;
         }
     }
 
-    
     public void loadDataset() {
         try (Session session = session()) {
             session.run("MATCH (n) DETACH DELETE n");
@@ -168,35 +151,23 @@ public class Neo4jManager implements AutoCloseable {
     }
 
     public boolean saveReviewPreference(String userId, int rating) {
-
-        try(Session session = session()) {
-
+        try (Session session = session()) {
             session.run(
-                """
-                MATCH (u:Usuario {id:$id})
-                SET u.reviewPreference =
-                    $rating
-                """,
-                Values.parameters(
-                    "id",
-                    userId,
-
-                    "rating",
-                    rating
-                )
+                "MATCH (u:Usuario {id:$id}) SET u.reviewPreference = $rating",
+                Values.parameters("id", userId, "rating", rating)
             );
-
             return true;
-
-        } catch(Exception e) {
-
+        } catch (Exception e) {
             return false;
         }
     }
 
+    public Session openSession() {
+        return driver.session(SessionConfig.forDatabase(databaseName));
+    }
 
     private Session session() {
-        return driver.session(SessionConfig.forDatabase(databaseName));
+        return openSession();
     }
 
     private Restaurant mapRestaurant(Record record) {
@@ -216,46 +187,111 @@ public class Neo4jManager implements AutoCloseable {
     }
 
     public Restaurant getRestaurantById(String id) {
-
         try (Session session = session()) {
-
             var result = session.run(
                 "MATCH (r:Restaurant {id:$id}) RETURN r",
                 Values.parameters("id", id)
             );
-
-            if (!result.hasNext()) {
-                return null;
-            }
-
+            if (!result.hasNext()) return null;
             return mapRestaurant(result.single());
         }
     }
 
     public List<String> getCities() {
-
         try (Session session = session()) {
-
-            var result = session.run(
-                """
+            var result = session.run("""
                 MATCH (r:Restaurant)
                 RETURN DISTINCT r.ciudad AS ciudad
                 ORDER BY ciudad
-                """
-            );
-
+                """);
             List<String> cities = new ArrayList<>();
-
-            while (result.hasNext()) {
-
-                cities.add(
-                    result.next()
-                        .get("ciudad")
-                        .asString()
-                );
-            }
-
+            while (result.hasNext()) cities.add(result.next().get("ciudad").asString());
             return cities;
+        }
+    }
+
+    public User getUserById(String userId) {
+        try (Session session = openSession()) {
+            var result = session.run(
+                "MATCH (u:Usuario {id: $id}) RETURN u",
+                Values.parameters("id", userId)
+            );
+            if (!result.hasNext()) return null;
+
+            var node = result.single().get("u").asNode();
+            User user = new User(
+                node.get("nombre").asString(""),
+                node.get("email").asString(""),
+                node.get("password").asString(""),
+                node.get("ciudad").asString("")
+            );
+            user.setId(node.get("id").asString(""));
+            if (node.containsKey("favoriteFood"))   user.setFavoriteFood(node.get("favoriteFood").asString(""));
+            if (node.containsKey("budget"))          user.setBudget(node.get("budget").asString(""));
+            if (node.containsKey("environment"))     user.setEnvironment(node.get("environment").asString(""));
+            if (node.containsKey("minRating"))       user.setMinRating(node.get("minRating").asDouble(0));
+            if (node.containsKey("distance"))        user.setDistance(node.get("distance").asString(""));
+            if (node.containsKey("reviewPreference")) user.setReviewPreference(node.get("reviewPreference").asInt(0));
+            return user;
+        } catch (Exception e) {
+            System.out.println("Error buscando usuario: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public boolean deleteUser(String userId) {
+        try (Session session = openSession()) {
+            session.run("MATCH (u:Usuario {id: $id}) DETACH DELETE u", Values.parameters("id", userId));
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error eliminando usuario: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean createRestaurant(models.Restaurant r) {
+        try (Session session = openSession()) {
+            session.run("""
+                CREATE (r:Restaurant {
+                    id:          $id,
+                    nombre:      $nombre,
+                    cocina:      $cocina,
+                    rating:      $rating,
+                    precio:      $precio,
+                    zona:        $zona,
+                    ciudad:      $ciudad,
+                    imagen:      $imagen,
+                    descripcion: $descripcion,
+                    ambiente:    $ambiente
+                })
+                """,
+                Values.parameters(
+                    "id",          r.getId() != null ? r.getId() : UUID.randomUUID().toString(),
+                    "nombre",      r.getName(),
+                    "cocina",      r.getCategory(),
+                    "rating",      r.getRating(),
+                    "precio",      r.getPrice(),
+                    "zona",        r.getZone(),
+                    "ciudad",      r.getCity(),
+                    "imagen",      r.getImage() != null ? r.getImage() : "",
+                    "descripcion", r.getDescription() != null ? r.getDescription() : "",
+                    "ambiente",    r.getEnvironment() != null ? r.getEnvironment() : ""
+                )
+            );
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error creando restaurante: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deleteRestaurant(String id) {
+        try (Session session = openSession()) {
+            session.run("MATCH (r:Restaurant {id: $id}) DETACH DELETE r", Values.parameters("id", id));
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error eliminando restaurante: " + e.getMessage());
+            return false;
         }
     }
 
