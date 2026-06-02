@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante - Trophinder</title>
+    <link rel="stylesheet" href="../css/restaurant.css">
+</head>
+<body>
+
+<header>
+    <h1>Trophinder</h1>
+</header>
+
+<main>
+
+    <div class="restaurant-box">
+
+        <img src="../assets/estancia.png" alt="La Estancia">
+
+        <div class="restaurant-info">
+
+            <h2>La Estancia</h2>
+
+            <p class="rating">⭐ 4.9</p>
+
+            <p>
+                Restaurante especializado en carnes y parrilladas.
+                Ambiente familiar, excelente servicio y cortes premium.
+            </p>
+
+            <div class="details">
+                <p><strong>Dirección:</strong> Zona 10, Ciudad de Guatemala</p>
+                <p><strong>Horario:</strong> 11:00 AM - 10:00 PM</p>
+                <p><strong>Teléfono:</strong> +502 5555-5555</p>
+                <p><strong>Tipo:</strong> Parrillada</p>
+            </div>
+
+            <div class="buttons">
+
+                <a id="backBtn" class="btn">
+                    Regresar
+                </a>
+
+                <a id="reviewBtn" class="btn">
+                    Calificar restaurante
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const from = params.get("from");
+
+const backBtn = document.getElementById("backBtn");
+const reviewBtn = document.getElementById("reviewBtn");
+
+if(from === "recommendation"){
+    backBtn.href = "recommendation.html";
+    reviewBtn.href = "review.html?from=recommendation";
+}
+else{
+    backBtn.href = "menu.html";
+    reviewBtn.href = "review.html?from=menu";
+}
+
+</script>
+
+</body>
+</html>

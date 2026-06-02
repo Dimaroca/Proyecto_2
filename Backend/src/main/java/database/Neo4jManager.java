@@ -1,13 +1,19 @@
 package database;
 
-import models.Restaurant;
-import models.User;
-import org.neo4j.driver.*;
-import org.neo4j.driver.Record;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Session;
+import org.neo4j.driver.SessionConfig;
+import org.neo4j.driver.Values;
+
+import models.Restaurant;
+import models.User;
 
 
 public class Neo4jManager implements AutoCloseable {
@@ -170,6 +176,50 @@ public class Neo4jManager implements AutoCloseable {
             node.get("descripcion").asString(""),
             node.get("ambiente").asString("")
         );
+    }
+
+    public Restaurant getRestaurantById(String id) {
+
+        try (Session session = session()) {
+
+            var result = session.run(
+                "MATCH (r:Restaurant {id:$id}) RETURN r",
+                Values.parameters("id", id)
+            );
+
+            if (!result.hasNext()) {
+                return null;
+            }
+
+            return mapRestaurant(result.single());
+        }
+    }
+
+    public List<String> getCities() {
+
+        try (Session session = session()) {
+
+            var result = session.run(
+                """
+                MATCH (r:Restaurant)
+                RETURN DISTINCT r.ciudad AS ciudad
+                ORDER BY ciudad
+                """
+            );
+
+            List<String> cities = new ArrayList<>();
+
+            while (result.hasNext()) {
+
+                cities.add(
+                    result.next()
+                        .get("ciudad")
+                        .asString()
+                );
+            }
+
+            return cities;
+        }
     }
 
     @Override

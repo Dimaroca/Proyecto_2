@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferencias - Trophinder</title>
+    <link rel="stylesheet" href="../css/question.css">
+</head>
+<body>
+
+    <header>
+        <h1>Trophinder</h1>
+    </header>
+    <main>
+        <div class="form-container">
+
+            <div class="form-header">
+                <h1>Preferencias de restaurantes</h1>
+                <p>Responde estas preguntas para recomendarte mejores opciones.</p>
+            </div>
+
+            <form>
+
+                <div class="question-card">
+                    <h3>1. ¿Qué tipo de comida prefieres?</h3>
+
+                    <label><input type="radio" name="food" value="italiana"> Italiana</label>
+                    <label><input type="radio" name="food" value="mexicana"> Mexicana</label>
+                    <label><input type="radio" name="food" value="japonesa"> Japonesa</label>
+                    <label><input type="radio" name="food" value="rapida"> Comida rápida</label>
+                </div>
+
+                <div class="question-card">
+                    <h3>2. ¿Cuál es tu presupuesto aproximado?</h3>
+
+                    <label><input type="radio" name="budget" value="bajo"> Bajo</label>
+                    <label><input type="radio" name="budget" value="medio"> Medio</label>
+                    <label><input type="radio" name="budget" value="alto"> Alto</label>
+                </div>
+
+                <div class="question-card">
+                    <h3>3. ¿Qué ambiente prefieres?</h3>
+
+                    <label><input type="radio" name="environment" value="familiar"> Familiar</label>
+                    <label><input type="radio" name="environment" value="romantico"> Romántico</label>
+                    <label><input type="radio" name="environment" value="casual"> Casual</label>
+                    <label><input type="radio" name="environment" value="elegante"> Elegante</label>
+                </div>
+
+                <button type="submit">Continuar</button>
+
+            </form>
+
+        </div>
+    </main>
+    <script src="../js/question.js"></script>
+</body>
+</html>

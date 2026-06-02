@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificar Restaurante</title>
+    <link rel="stylesheet" href="../css/review.css">
+</head>
+<body>
+
+<header>
+    <h1>Trophinder</h1>
+</header>
+
+<main>
+
+    <div class="review-box">
+
+        <h2>Califica tu experiencia</h2>
+
+        <h3>La Estancia</h3>
+
+        <form>
+
+            <label>Calificación</label>
+
+            <select>
+                <option>⭐ 1</option>
+                <option>⭐ 2</option>
+                <option>⭐ 3</option>
+                <option>⭐ 4</option>
+                <option>⭐ 5</option>
+            </select>
+
+            <label>Comentario</label>
+
+            <textarea rows="6"
+            placeholder="Describe tu experiencia"></textarea>
+
+            <button type="submit">
+                Enviar reseña
+            </button>
+
+        </form>
+
+        <div class="buttons">
+            <a id="backBtn">Regresar</a>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const from = params.get("from");
+
+const backBtn = document.getElementById("backBtn");
+
+if(from === "recommendation"){
+    backBtn.href = "recommendation.html";
+}
+else{
+    backBtn.href = "menu.html";
+}
+
+</script>
+
+</body>
+</html>

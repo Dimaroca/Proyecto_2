@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - FoodGraph</title>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="register-box">
+                <h1>Crear cuenta</h1>
+                <p class="subtitle">Regístrate para recibir recomendaciones</p>
+                <form>
+                    <input type="text" placeholder="Nombre completo" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="password" placeholder="Contraseña" required>
+                    <input type="password" placeholder="Confirmar contraseña" required>
+                    <select id="citySelect" required>
+                        <option value="" disabled selected>
+                            Elija su ciudad
+                        </option>
+                    </select>
+
+                    <button type="submit">Registrarse</button>
+                </form>
+
+                <p class="login">
+                    ¿Ya tienes cuenta?
+                    <a href="login.html">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="../js/register.js"></script>
+</body>
+</html>

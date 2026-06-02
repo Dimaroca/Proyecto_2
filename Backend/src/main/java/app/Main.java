@@ -1,16 +1,20 @@
 package app;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
 import database.Neo4jManager;
 import models.Restaurant;
 import models.User;
 import services.RestaurantService;
-
-import java.util.List;
-import java.util.Map;
-
-import static spark.Spark.*;
+import static spark.Spark.before;
+import static spark.Spark.get;
+import static spark.Spark.options;
+import static spark.Spark.port;
+import static spark.Spark.post;
 
 public class Main {
 
@@ -104,6 +108,37 @@ public class Main {
                     : neo4j.getAllRestaurants();
 
             return gson.toJson(restaurants);
+        });
+
+        get("/api/ciudades", (req, res) -> {
+
+            List<String> ciudades = neo4j.getCities();
+
+            return gson.toJson(ciudades);
+        });
+
+        
+
+        get("/api/restaurante/:id", (req, res) -> {
+
+            String id = req.params(":id");
+
+            Restaurant restaurant =
+                    neo4j.getRestaurantById(id);
+
+            if (restaurant == null) {
+
+                res.status(404);
+
+                return gson.toJson(
+                        Map.of(
+                                "error",
+                                "Restaurante no encontrado"
+                        )
+                );
+            }
+
+            return gson.toJson(restaurant);
         });
 
         post("/api/recomendaciones", (req, res) -> {
