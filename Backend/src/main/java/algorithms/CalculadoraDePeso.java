@@ -24,7 +24,9 @@ public class CalculadoraDePeso {
         }
 
         // Rating
-        if (restaurant.getRating() >= 4.0) {
+        if (restaurant.getRating()
+        >= user.getMinRating()) {
+
             weight += 20;
         }
 
@@ -32,6 +34,33 @@ public class CalculadoraDePeso {
         if (restaurant.getEnvironment() != null && user.getEnvironment() != null) {
             if (restaurant.getEnvironment().equalsIgnoreCase(user.getEnvironment())) {
                 weight += 15;
+            }
+        }
+
+        if (user.getDistance() != null) {
+
+            switch(user.getDistance()) {
+
+                case "same":
+
+                    if (restaurant.getCity()
+                            .equalsIgnoreCase(
+                                user.getCity())) {
+
+                        weight += 10;
+                    }
+
+                    break;
+
+                case "near":
+
+                    weight += 5;
+                    break;
+
+                case "any":
+
+                    weight += 10;
+                    break;
             }
         }
 

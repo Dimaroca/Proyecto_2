@@ -10,6 +10,8 @@ public class User {
     private String favoriteFood;
     private String budget;
     private String environment;
+    private double minRating;
+    private String distance;
 
     public User(String name, String email, String password, String city) {
         this.name = name;
@@ -42,4 +44,12 @@ public class User {
     { return environment; }
     public void setEnvironment(String e)  
     { this.environment = e; }
+    public double getMinRating() 
+    {return minRating;}
+    public void setMinRating(double minRating) 
+    {this.minRating = minRating;}
+    public String getDistance() 
+    {return distance;}
+    public void setDistance(String distance) 
+    {this.distance = distance;}
 }

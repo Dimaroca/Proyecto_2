@@ -84,20 +84,23 @@ public class Neo4jManager implements AutoCloseable {
     }
 
     
-    public boolean savePreferences(String userId, String favoriteFood,
-                                   String budget, String environment) {
+    public boolean savePreferences(String userId, String favoriteFood, String budget, String environment, double minRating, String distance) {
         try (Session session = session()) {
             session.run("""
                 MATCH (u:Usuario {id: $id})
                 SET u.favoriteFood = $food,
                     u.budget       = $budget,
-                    u.environment  = $env
+                    u.environment  = $env,
+                    u.minRating    = $rating,
+                    u.distance     = $distance
                 """,
                 Values.parameters(
                     "id",     userId,
                     "food",   favoriteFood,
                     "budget", budget,
-                    "env",    environment
+                    "env",    environment,
+                    "rating", minRating,
+                    "distance", distance
                 )
             );
             return true;

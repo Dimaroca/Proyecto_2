@@ -7,6 +7,7 @@
 
 body{
     background:#F8FAFC;
+    min-height:100vh;
 }
 
 header{
@@ -20,6 +21,7 @@ header{
 
 header h1{
     color:white;
+    font-size:28px;
 }
 
 main{
@@ -27,26 +29,38 @@ main{
 }
 
 .form-container{
-    width:650px;
+    width:700px;
     margin:0 auto;
 }
 
-.form-header,
-.question-card{
+.form-header{
     background:#FFFFFF;
-    border-radius:10px;
-    padding:30px;
-    margin-bottom:20px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    border-radius:18px;
+    padding:35px;
+    margin-bottom:25px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.08);
 }
 
 .form-header h1{
-    color:#1F2937;
+color:#1F2937;
     margin-bottom:10px;
 }
 
 .form-header p{
     color:#6B7280;
+}
+
+.question-card{
+    background:#FFFFFF;
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.08);
+    transition:0.25s;
+}
+
+.question-card:hover{
+    transform:translateY(-3px);
 }
 
 .question-card h3{
@@ -56,26 +70,60 @@ main{
 
 label{
     display:block;
-    margin-bottom:14px;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
     color:#374151;
     cursor:pointer;
+    transition:0.2s;
 }
+
+label:hover
 
 input[type="radio"]{
     margin-right:10px;
+    transform:scale(1.15);
+}
+
+input[type="range"]{
+    width:100%;
+    margin-top:10px;
+    margin-bottom:15px;
+    accent-color:#2563EB;
+}
+
+#ratingValue{
+    font-weight:bold;
+    color:#F59E0B;
+}
+
+select{
+    width:100%;
+    padding:14px;
+    border:1px solid #D1D5DB;
+    border-radius:10px;
+    font-size:15px;
+    background:white;
 }
 
 button{
-    background:#3B82F6;
+    background:#2563EB;
     color:white;
     border:none;
-    padding:14px 30px;
-    border-radius:8px;
+    padding:15px 35px;
+    border-radius:12px;
     font-weight:bold;
     cursor:pointer;
+    transition:0.2s;
     float:right;
+    margin-top:10px;
 }
 
 button:hover{
     background:#1D4ED8;
+    transform:translateY(-2px);
+}
+
+button:active{
+    transform:translateY(0);
 }

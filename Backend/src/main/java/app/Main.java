@@ -88,8 +88,15 @@ public class Main {
             String food = body.get("food").getAsString();
             String budget = body.get("budget").getAsString();
             String environment = body.get("environment").getAsString();
+            double minRating =
+                    body.get("minRating")
+                        .getAsDouble();
 
-            boolean ok = neo4j.savePreferences(userId, food, budget, environment);
+            String distance =
+                    body.get("distance")
+                        .getAsString();
+
+            boolean ok = neo4j.savePreferences(userId, food, budget, environment, minRating, distance);
 
             if (!ok) {
                 res.status(500);

@@ -21,6 +21,7 @@
 
             <form>
 
+```
                 <div class="question-card">
                     <h3>1. ¿Qué tipo de comida prefieres?</h3>
 
@@ -47,9 +48,50 @@
                     <label><input type="radio" name="environment" value="elegante"> Elegante</label>
                 </div>
 
-                <button type="submit">Continuar</button>
+                <div class="question-card">
+                    <h3>4. ¿Qué calificación mínima aceptas?</h3>
+
+                    <input
+                        type="range"
+                        id="minRating"
+                        min="1"
+                        max="5"
+                        step="0.5"
+                        value="4">
+
+                    <p>
+                        Calificación mínima:
+                        <span id="ratingValue">4</span> ⭐
+                    </p>
+                </div>
+
+                <div class="question-card">
+                    <h3>5. ¿Qué tan lejos estás dispuesto a ir?</h3>
+
+                    <select id="distance">
+
+                        <option value="same">
+                            Solo mi ciudad
+                        </option>
+
+                        <option value="near">
+                            Ciudades cercanas
+                        </option>
+
+                        <option value="any">
+                            No me importa
+                        </option>
+
+                    </select>
+                </div>
+
+                <button type="submit">
+                    Continuar
+                </button>
+                ```
 
             </form>
+
 
         </div>
     </main>
