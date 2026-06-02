@@ -45,6 +45,12 @@ async function loadRestaurants() {
                 <span>⭐ ${r.rating.toFixed(1)}</span>
             `;
 
+            card.addEventListener("click", () => {
+
+                window.location.href =
+                    `restaurant.html?id=${r.id}&from=menu`;
+            });
+
             slider.appendChild(card);
         });
 

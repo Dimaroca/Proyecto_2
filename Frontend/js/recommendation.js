@@ -52,6 +52,12 @@ function createCard(restaurant) {
         <span>⭐ ${restaurant.rating.toFixed(1)}</span>
     `;
 
+    card.addEventListener("click", () => {
+
+        window.location.href =
+            `restaurant.html?id=${restaurant.id}&from=recommendation`;
+    });
+
     return card;
 }
 
