@@ -18,12 +18,10 @@ services:
   backend:
     build:
       context: ./Backend
-
+      dockerfile: Dockerfile
     container_name: trophinder-api
-
     ports:
       - "4567:4567"
-
     depends_on:
       - neo4j
 
