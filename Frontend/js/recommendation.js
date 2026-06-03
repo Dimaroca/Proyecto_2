@@ -185,6 +185,11 @@ async function loadRecommendations(){
 
         const restaurants =
             await response.json();
+        
+            restaurants.sort(
+            (a, b) => b.rating - a.rating
+        );
+
 
         const slider =
             document.getElementById(

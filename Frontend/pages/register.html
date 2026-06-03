@@ -1,42 +1,64 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../assets/logo.png">
-    <title>Register - Throphinder</title>
-    <link rel="stylesheet" href="../css/register.css">
-</head>
-<body>
-    <div class="container">
-        <div class="card">
-            <div class="register-box">
-                <div class="nombre-container">
-                    <img src="../assets/nombre.png" alt="Throphinder Logo">
-                </div>
-                <h1>Crear cuenta</h1>
-                <p class="subtitle">Regístrate para recibir recomendaciones</p>
-                <form>
-                    <input type="text" placeholder="Nombre completo" required>
-                    <input type="email" placeholder="Correo electrónico" required>
-                    <input type="password" placeholder="Contraseña" required>
-                    <input type="password" placeholder="Confirmar contraseña" required>
-                    <select id="citySelect" required>
-                        <option value="" disabled selected>
-                            Elija su ciudad
-                        </option>
-                    </select>
+<!-- Contenedor principal -->
+<div class="container">
 
-                    <button type="submit">Registrarse</button>
-                </form>
+    <!-- Tarjeta de registro -->
+    <div class="card">
 
-                <p class="login">
-                    ¿Ya tienes cuenta?
-                    <a href="login.html">Inicia sesión</a>
-                </p>
+        <!-- Caja que contiene el formulario -->
+        <div class="register-box">
+
+            <!-- Logo de la aplicación -->
+            <div class="nombre-container">
+                <img src="../assets/nombre.png" alt="Throphinder Logo">
             </div>
+
+            <!-- Título principal -->
+            <h1>Crear cuenta</h1>
+
+            <!-- Texto descriptivo -->
+            <p class="subtitle">
+                Regístrate para recibir recomendaciones
+            </p>
+
+            <!-- Formulario de registro -->
+            <form>
+
+                <!-- Nombre completo -->
+                <input type="text" placeholder="Nombre completo" required>
+
+                <!-- Correo electrónico -->
+                <input type="email" placeholder="Correo electrónico" required>
+
+                <!-- Contraseña -->
+                <input type="password" placeholder="Contraseña" required>
+
+                <!-- Confirmación de contraseña -->
+                <input type="password" placeholder="Confirmar contraseña" required>
+
+                <!-- Selección de ciudad -->
+                <select id="citySelect" required>
+
+                    <option value="" disabled selected>
+                        Elija su ciudad
+                    </option>
+
+                </select>
+
+                <!-- Botón de registro -->
+                <button type="submit">
+                    Registrarse
+                </button>
+
+            </form>
+
+            <!-- Enlace para usuarios registrados -->
+            <p class="login">
+                ¿Ya tienes cuenta?
+                <a href="login.html">Inicia sesión</a>
+            </p>
+
         </div>
+
     </div>
-    <script src="../js/register.js"></script>
-</body>
-</html>
+
+</div>

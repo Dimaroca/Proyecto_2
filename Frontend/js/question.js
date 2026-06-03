@@ -4,14 +4,89 @@ const rating = document.getElementById("minRating");
 const ratingValue = document.getElementById("ratingValue");
 const ratingStars = document.getElementById("ratingStars");
 
+const foodSelect = document.getElementById("foodSelect");
+
+/* ==========================
+   CARGAR TIPOS DE COMIDA
+========================== */
+
+async function loadFoods() {
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:4567/api/restaurantes"
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                "No se pudieron cargar los restaurantes"
+            );
+        }
+
+        const restaurants =
+            await response.json();
+
+        const foods = new Set();
+
+        restaurants.forEach(r => {
+
+            if (!r.category) return;
+
+            r.category
+                .split(",")
+                .forEach(food => {
+
+                    const cleanFood =
+                        food.trim();
+
+                    if (cleanFood.length > 0) {
+                        foods.add(cleanFood);
+                    }
+                });
+        });
+
+        [...foods]
+            .sort()
+            .forEach(food => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = food;
+                option.textContent = food;
+
+                foodSelect.appendChild(option);
+            });
+
+    } catch(error) {
+
+        console.error(
+            "Error cargando tipos de comida:",
+            error
+        );
+    }
+}
+
+loadFoods();
+
+/* ==========================
+   RATING
+========================== */
+
 function updateRating() {
 
-    const value = parseFloat(rating.value);
+    const value =
+        parseFloat(rating.value);
 
-    ratingValue.textContent = value.toFixed(1);
+    ratingValue.textContent =
+        value.toFixed(1);
 
-    const fullStars = Math.floor(value);
-    const emptyStars = 5 - fullStars;
+    const fullStars =
+        Math.floor(value);
+
+    const emptyStars =
+        5 - fullStars;
 
     ratingStars.textContent =
         "★".repeat(fullStars) +
@@ -34,13 +109,16 @@ const logoutBtn =
 
 if (logoutBtn) {
 
-    logoutBtn.addEventListener("click", () => {
+    logoutBtn.addEventListener(
+        "click",
+        () => {
 
-        sessionStorage.clear();
+            sessionStorage.clear();
 
-        window.location.href =
-            "login.html";
-    });
+            window.location.href =
+                "login.html";
+        }
+    );
 }
 
 /* ==========================
@@ -54,9 +132,7 @@ form.addEventListener(
         event.preventDefault();
 
         const food =
-            form.querySelector(
-                "input[name='food']:checked"
-            )?.value;
+            foodSelect.value;
 
         const budget =
             form.querySelector(
@@ -127,7 +203,7 @@ form.addEventListener(
                     );
                 }
 
-            } catch (error) {
+            } catch(error) {
 
                 console.error(
                     "No se pudieron guardar preferencias:",

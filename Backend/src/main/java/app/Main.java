@@ -158,16 +158,57 @@ public class Main {
         });
 
         post("/api/recomendaciones", (req, res) -> {
-            JsonObject body = gson.fromJson(req.body(), JsonObject.class);
 
-            User user = new User("", "", "", body.has("city") ? body.get("city").getAsString() : "");
-            user.setFavoriteFood(body.get("food").getAsString());
-            user.setBudget(body.get("budget").getAsString());
-            user.setEnvironment(body.get("environment").getAsString());
+            JsonObject body =
+                gson.fromJson(
+                    req.body(),
+                    JsonObject.class
+                );
 
-            List<Restaurant> all = restaurantService.getAllRestaurants();
-            List<Restaurant> recommended = restaurantService.recommendRestaurants(all, user);
-            return gson.toJson(recommended.stream().limit(10).toList());
+            User user =
+                new User(
+                    "",
+                    "",
+                    "",
+                    body.has("city")
+                        ? body.get("city").getAsString()
+                        : ""
+                );
+
+            user.setFavoriteFood(
+                body.get("food").getAsString()
+            );
+
+            user.setBudget(
+                body.get("budget").getAsString()
+            );
+
+            user.setEnvironment(
+                body.get("environment").getAsString()
+            );
+
+            user.setMinRating(
+                body.get("minRating").getAsDouble()
+            );
+
+            user.setDistance(
+                body.get("distance").getAsString()
+            );
+
+            List<Restaurant> all =
+                restaurantService.getAllRestaurants();
+
+            List<Restaurant> recommended =
+                restaurantService.recommendRestaurants(
+                    all,
+                    user
+                );
+
+            return gson.toJson(
+                recommended.stream()
+                    .limit(10)
+                    .toList()
+            );
         });
 
         System.out.println("API corriendo en http://localhost:4567");

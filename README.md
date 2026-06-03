@@ -1,90 +1,240 @@
-Autores: Jair Morales, Diego Rodríguez, Christopher Serrano
+ThropFinder - Sistema de Recomendación de Restaurantes
 
-# Sistema de Recomendación de Restaurantes con Neo4j
+Autores: Diego Rodríguez - 25215, Jair Morales - 25351, Christopher Serrano - 251375
 
-Este proyecto demuestra la conexión entre Java y Neo4j utilizando una estructura de grafo ponderado basada en datos de restaurantes. El programa carga información desde un dataset CSV y crea relaciones dentro de un grafo que simulan la base de un sistema de recomendación.
+Descripción General
 
-## Características
+ThropFinder es una aplicación web diseñada para ayudar a los usuarios a descubrir restaurantes que se adapten a sus gustos y preferencias personales. El sistema utiliza información almacenada en una base de datos Neo4j y aplica algoritmos de recomendación para generar sugerencias personalizadas según los criterios seleccionados por cada usuario.
 
-- Conexión entre Java y Neo4j
-- Carga de dataset CSV
-- Generación automática de grafos
-- Relaciones ponderadas usando ratings de restaurantes
-- Carga limitada a 20 datos para pruebas y visualización
+La plataforma permite registrar usuarios, gestionar preferencias, buscar restaurantes y recibir recomendaciones basadas en factores como tipo de comida, presupuesto, calificación mínima y ubicación.
 
-## Tecnologías Utilizadas
+Funcionalidades Principales
+Registro e Inicio de Sesión
 
-- Java 17
-- Maven
-- Neo4j
-- Neo4j Java Driver
+El sistema permite:
 
+Crear nuevas cuentas de usuario.
+Iniciar sesión con credenciales registradas.
+Almacenar información básica del usuario.
+Mantener una sesión activa durante la navegación.
+Gestión de Preferencias
 
-## Requisitos
+Los usuarios pueden personalizar sus recomendaciones mediante:
 
-Antes de ejecutar el programa es necesario tener instalado:
+Tipo de comida preferida.
+Nivel de presupuesto.
+Ambiente deseado.
+Calificación mínima aceptable.
+Distancia o ubicación preferida.
 
-- Java 17 o superior
-- Maven
-- Neo4j Desktop
+Estas preferencias se almacenan para mejorar la calidad de las recomendaciones generadas.
 
-## Importante
+Búsqueda de Restaurantes
 
-Neo4j DEBE estar encendido antes de ejecutar el programa.
+El sistema permite consultar restaurantes utilizando distintos criterios:
 
-Pasos:
+Ciudad.
+Tipo de comida.
+Presupuesto.
+Calificación mínima.
+Zona o localidad.
 
-1. Abrir Neo4j Desktop
-2. Iniciar la instancia local de Neo4j
-3. Crear una base de datos llamada `restaurants`
-4. Verificar que la base de datos esté activa antes de ejecutar Maven
+Los resultados son obtenidos directamente desde la base de datos Neo4j.
 
-Si Neo4j no está ejecutándose, el programa no podrá conectarse correctamente.
+Recomendaciones Personalizadas
 
-## Configuración de la Base de Datos
+El sistema analiza las preferencias seleccionadas por el usuario y calcula una puntuación de afinidad para cada restaurante disponible.
 
-Usar las mismas credenciales configuradas en `Main.java`.
+Entre los factores considerados se encuentran:
 
-Ejemplo:
+Coincidencia de tipo de comida.
+Compatibilidad con el presupuesto.
+Calificación del restaurante.
+Preferencias de ubicación.
+Preferencias de valoración.
 
-```java
-String uri = "bolt://localhost:7687";
-String user = "neo4j";
-String password = "tu_password";
-```
+Los restaurantes son ordenados según su nivel de afinidad para presentar primero las opciones más relevantes.
 
-## Archivo CSV
+Visualización de Restaurantes
 
-El dataset debe llamarse:
+Cada restaurante muestra información relevante como:
 
-```text
-restaurant.csv
-```
+Nombre.
+Categoría gastronómica.
+Calificación.
+Ciudad.
+Zona.
+Información adicional almacenada en la base de datos.
+Arquitectura del Sistema
 
-y debe colocarse dentro de la carpeta `import` de Neo4j.
+El proyecto está dividido en tres componentes principales:
 
-## Cómo Ejecutar el Programa
+Frontend
 
-Compilar y ejecutar usando Maven:
+Desarrollado utilizando:
 
-```bash
-mvn clean compile
-mvn exec:java
-```
+HTML5
+CSS3
+JavaScript
 
-## Visualización del Grafo
+Responsable de:
 
-Después de ejecutar el programa, abrir Neo4j Query y ejecutar:
+Interfaz gráfica.
+Formularios.
+Visualización de resultados.
+Comunicación con la API.
+Backend
 
-```cypher
-MATCH (n)-[r]->(m)
-RETURN n,r,m;
-```
+Desarrollado en Java utilizando Spark Java.
 
-Esto mostrará el grafo generado con nodos y relaciones ponderadas.
+Responsable de:
 
-## Notas
+Procesamiento de solicitudes.
+Gestión de usuarios.
+Generación de recomendaciones.
+Acceso a la base de datos.
+Base de Datos
 
-- El programa únicamente carga 20 entradas del dataset para facilitar pruebas y visualización.
-- Las relaciones utilizan los ratings de los restaurantes como peso.
-- La estructura del grafo sirve como base para un sistema de recomendación.
+Implementada con Neo4j.
+
+Responsable de:
+
+Almacenamiento de usuarios.
+Almacenamiento de restaurantes.
+Persistencia de preferencias.
+Consultas utilizadas por el sistema.
+Algoritmos Utilizados
+Cálculo de Afinidad
+
+El sistema utiliza una función de ponderación que asigna puntajes a los restaurantes según la compatibilidad con las preferencias del usuario.
+
+Los factores evaluados incluyen:
+
+Tipo de comida.
+Presupuesto.
+Calificación.
+Distancia.
+Preferencias de valoración.
+Algoritmo de Dijkstra
+
+El sistema incorpora una implementación del algoritmo de Dijkstra para el procesamiento y evaluación de los resultados dentro del sistema de recomendación.
+
+Requerimientos de Software
+
+Para ejecutar correctamente el sistema se requiere:
+
+Sistema Operativo
+Windows 10 o superior
+Linux
+macOS
+Java
+JDK 17 o superior
+
+Verificar instalación:
+
+java -version
+Maven
+Apache Maven 3.8 o superior
+
+Verificar instalación:
+
+mvn -version
+Docker
+Docker Desktop o Docker Engine
+
+Verificar instalación:
+
+docker --version
+Docker Compose
+
+Verificar instalación:
+
+docker compose version
+Navegador Web
+
+Cualquiera de los siguientes:
+
+Google Chrome
+Microsoft Edge
+Mozilla Firefox
+Instalación del Sistema
+1. Clonar o descargar el proyecto
+git clone <repositorio>
+
+o descargar el archivo comprimido del proyecto.
+
+2. Ingresar a la carpeta del proyecto
+cd Proyecto_2
+3. Iniciar los contenedores
+docker compose up --build
+
+Este comando iniciará:
+
+Neo4j
+Backend Java
+Servicios necesarios para la aplicación
+4. Verificar Neo4j
+
+Abrir:
+
+http://localhost:7474
+
+Credenciales por defecto:
+
+Usuario: neo4j
+Contraseña: 12345678
+5. Verificar API
+
+Abrir:
+
+http://localhost:4567
+
+La API quedará disponible para recibir solicitudes desde el frontend.
+
+6. Ejecutar el Frontend
+
+Abrir los archivos HTML mediante un servidor local o desde el entorno configurado para el proyecto.
+
+La navegación principal inicia desde:
+
+login.html
+Flujo de Uso
+Registrar un nuevo usuario.
+Iniciar sesión.
+Completar el formulario de preferencias.
+Seleccionar criterios de búsqueda.
+Generar recomendaciones.
+Visualizar restaurantes recomendados.
+Consultar información detallada de cada restaurante.
+Estructura General del Proyecto
+Proyecto_2
+│
+├── Backend
+│   ├── algorithms
+│   ├── app
+│   ├── database
+│   ├── models
+│   ├── services
+│   └── pom.xml
+│
+├── Frontend
+│   ├── html
+│   ├── css
+│   ├── js
+│   └── assets
+│
+├── Data
+│   └── restaurants.csv
+│
+├── docker-compose.yml
+│
+└── README.txt
+Tecnologías Utilizadas
+Java
+Spark Java
+Neo4j
+Maven
+Docker
+HTML5
+CSS3
+JavaScript
