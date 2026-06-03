@@ -1,14 +1,14 @@
-const arrows =
-document.querySelectorAll(".arrow");
+// Obtiene todas las flechas utilizadas para mover los sliders
+const arrows = document.querySelectorAll(".arrow");
 
 /* ==========================
    ESTRELLAS
 ========================== */
 
+// Genera una representación visual de estrellas según la calificación
 function generateStars(rating){
 
-    const rounded =
-        Math.round(rating);
+    const rounded = Math.round(rating);
 
     return (
         "★".repeat(rounded) +
@@ -20,53 +20,55 @@ function generateStars(rating){
    SLIDERS
 ========================== */
 
+// Agrega funcionalidad a cada flecha de navegación
 arrows.forEach(arrow => {
 
-    arrow.addEventListener(
-        "click",
-        () => {
+    arrow.addEventListener("click", () => {
 
-            const sliderId =
-                arrow.dataset.slider;
+        // Obtiene el id del slider asociado
+        const sliderId = arrow.dataset.slider;
 
-            const direction =
-                Number(
-                    arrow.dataset.direction
-                );
+        // Obtiene la dirección del movimiento
+        const direction = Number(
+            arrow.dataset.direction
+        );
 
-            const slider =
-                document.getElementById(
-                    sliderId
-                );
+        // Busca el slider correspondiente
+        const slider = document.getElementById(
+            sliderId
+        );
 
-            if(!slider ||
-               !slider.firstElementChild){
-
-                return;
-            }
-
-            if(direction > 0){
-
-                slider.appendChild(
-                    slider.firstElementChild
-                );
-
-            }else{
-
-                slider.insertBefore(
-                    slider.lastElementChild,
-                    slider.firstElementChild
-                );
-            }
+        // Verifica que exista y tenga elementos
+        if(
+            !slider ||
+            !slider.firstElementChild
+        ){
+            return;
         }
-    );
 
+        // Mueve la primera tarjeta al final
+        if(direction > 0){
+
+            slider.appendChild(
+                slider.firstElementChild
+            );
+
+        }else{
+
+            // Mueve la última tarjeta al inicio
+            slider.insertBefore(
+                slider.lastElementChild,
+                slider.firstElementChild
+            );
+        }
+    });
 });
 
 /* ==========================
    CREAR TARJETA
 ========================== */
 
+// Crea una tarjeta visual para cada restaurante
 function createCard(restaurant){
 
     const card =
@@ -75,6 +77,7 @@ function createCard(restaurant){
     card.className =
         "restaurant-card";
 
+    // Inserta la información del restaurante
     card.innerHTML = `
 
         <div class="restaurant-name">
@@ -101,14 +104,13 @@ function createCard(restaurant){
 
     `;
 
-    card.addEventListener(
-        "click",
-        () => {
+    // Redirige a la página de detalles al hacer clic
+    card.addEventListener("click", () => {
 
-            window.location.href =
-                `restaurant.html?id=${restaurant.id}&from=recommendation`;
-        }
-    );
+        window.location.href =
+            `restaurant.html?id=${restaurant.id}&from=recommendation`;
+
+    });
 
     return card;
 }
@@ -117,22 +119,15 @@ function createCard(restaurant){
    CARGAR RECOMENDACIONES
 ========================== */
 
+// Obtiene las recomendaciones desde el backend
 async function loadRecommendations(){
 
+    // Recupera las preferencias guardadas
     const food =
-        sessionStorage.getItem(
-            "food"
-        );
+        sessionStorage.getItem("food");
 
     const budget =
-        sessionStorage.getItem(
-            "budget"
-        );
-
-    const environment =
-        sessionStorage.getItem(
-            "environment"
-        );
+        sessionStorage.getItem("budget");
 
     const minRating =
         parseFloat(
@@ -151,8 +146,15 @@ async function loadRecommendations(){
             "userId"
         ) || "";
 
+    // Obtiene el slider donde se mostrarán los resultados
+    const slider =
+        document.getElementById(
+            "recommendedSlider"
+        );
+
     try{
 
+        // Solicita recomendaciones al servidor
         const response =
             await fetch(
                 "http://localhost:4567/api/recomendaciones",
@@ -165,17 +167,17 @@ async function loadRecommendations(){
                     },
 
                     body:JSON.stringify({
-
                         userId,
                         food,
                         budget,
-                        environment,
+                        environment: "",
                         minRating,
                         distance
                     })
                 }
             );
 
+        // Verifica si hubo un error en la respuesta
         if(!response.ok){
 
             throw new Error(
@@ -183,21 +185,19 @@ async function loadRecommendations(){
             );
         }
 
+        // Convierte la respuesta a JSON
         const restaurants =
             await response.json();
-        
-            restaurants.sort(
+
+        // Ordena las recomendaciones por calificación
+        restaurants.sort(
             (a, b) => b.rating - a.rating
         );
 
-
-        const slider =
-            document.getElementById(
-                "recommendedSlider"
-            );
-
+        // Limpia el slider antes de mostrar resultados
         slider.innerHTML = "";
 
+        // Muestra mensaje si no existen recomendaciones
         if(restaurants.length === 0){
 
             slider.innerHTML = `
@@ -209,7 +209,7 @@ async function loadRecommendations(){
                     </h3>
 
                     <p>
-                        Intenta modificar tus preferencias.
+                        Intenta modificar tus preferencias
                     </p>
 
                 </div>
@@ -219,20 +219,39 @@ async function loadRecommendations(){
             return;
         }
 
+        // Agrega cada restaurante al slider
         restaurants.forEach(r => {
 
             slider.appendChild(
                 createCard(r)
             );
+
         });
 
-    }
-    catch(error){
+    }catch(error){
 
+        // Muestra el error en consola
         console.error(
             "Error cargando recomendaciones:",
             error
         );
+
+        // Muestra mensaje de error en pantalla
+        slider.innerHTML = `
+
+            <div class="empty-state">
+
+                <h3>
+                    Error cargando recomendaciones
+                </h3>
+
+                <p>
+                    Revisa que el servidor esté encendido
+                </p>
+
+            </div>
+
+        `;
     }
 }
 
@@ -240,4 +259,5 @@ async function loadRecommendations(){
    INICIO
 ========================== */
 
+// Ejecuta la carga de recomendaciones al abrir la página
 loadRecommendations();

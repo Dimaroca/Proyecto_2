@@ -1,3 +1,8 @@
+/* ==========================
+   CONFIGURACIÓN GENERAL
+========================== */
+
+/* Reinicia los estilos por defecto del navegador */
 *{
     margin:0;
     padding:0;
@@ -5,6 +10,7 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+/* Configuración general del cuerpo de la página */
 body{
     background:#F4E9D8;
     min-height:100vh;
@@ -14,6 +20,7 @@ body{
    HEADER
 ========================== */
 
+/* Barra superior de navegación */
 header{
 
     height:80px;
@@ -28,12 +35,14 @@ header{
     box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
+/* Tamaño del logo */
 .nombre-container img{
 
     width:180px;
     height:auto;
 }
 
+/* Contenedor de acciones del encabezado */
 .header-actions{
 
     margin-left:auto;
@@ -43,6 +52,7 @@ header{
     gap:20px;
 }
 
+/* Botón para cerrar sesión */
 .logout-btn{
 
     background:#3B2A21;
@@ -62,23 +72,26 @@ header{
     transition:.3s;
 }
 
+/* Efecto al pasar el cursor */
 .logout-btn:hover{
 
     background:#382f2a;
 }
 
 /* ==========================
-   MAIN
+   CONTENIDO PRINCIPAL
 ========================== */
 
+/* Espaciado general del contenido */
 main{
     padding:40px;
 }
 
 /* ==========================
-   TITULO
+   TITULOS
 ========================== */
 
+/* Título principal de la página */
 .page-title{
 
     text-align:center;
@@ -90,6 +103,7 @@ main{
     margin-bottom:15px;
 }
 
+/* Subtítulo descriptivo */
 .page-subtitle{
 
     text-align:center;
@@ -102,13 +116,15 @@ main{
 }
 
 /* ==========================
-   SECTIONS
+   SECCIONES
 ========================== */
 
+/* Separación entre secciones */
 .section{
     margin-bottom:70px;
 }
 
+/* Títulos de cada sección */
 .section h2{
 
     color:#B85C38;
@@ -122,6 +138,7 @@ main{
    SLIDER
 ========================== */
 
+/* Contenedor principal del carrusel */
 .slider-container{
 
     position:relative;
@@ -130,6 +147,7 @@ main{
     align-items:center;
 }
 
+/* Área donde se muestran las tarjetas */
 .slider{
 
     display:flex;
@@ -144,9 +162,10 @@ main{
 }
 
 /* ==========================
-   CARDS
+   TARJETAS DE RESTAURANTES
 ========================== */
 
+/* Tarjeta individual de restaurante */
 .restaurant-card{
 
     width:280px;
@@ -171,6 +190,7 @@ main{
     transition:.3s;
 }
 
+/* Efecto al pasar el cursor sobre la tarjeta */
 .restaurant-card:hover{
 
     transform:translateY(-8px);
@@ -179,6 +199,7 @@ main{
     0 12px 25px rgba(59,42,33,.12);
 }
 
+/* Nombre del restaurante */
 .restaurant-name{
 
     color:#634334;
@@ -192,6 +213,7 @@ main{
     margin-bottom:10px;
 }
 
+/* Categoría del restaurante */
 .restaurant-category{
 
     color:#B85C38;
@@ -201,6 +223,7 @@ main{
     font-weight:600;
 }
 
+/* Contenedor de la calificación */
 .restaurant-rating{
 
     margin-top:auto;
@@ -212,6 +235,7 @@ main{
     gap:12px;
 }
 
+/* Estrellas de la calificación */
 .stars{
 
     color:#C99A2E;
@@ -221,6 +245,7 @@ main{
     letter-spacing:2px;
 }
 
+/* Valor numérico de la calificación */
 .rating-number{
 
     color:#634334;
@@ -231,9 +256,10 @@ main{
 }
 
 /* ==========================
-   FLECHAS
+   FLECHAS DE NAVEGACIÓN
 ========================== */
 
+/* Botones laterales del slider */
 .arrow{
 
     position:absolute;
@@ -258,6 +284,7 @@ main{
     transition:.3s;
 }
 
+/* Efecto al pasar el cursor */
 .arrow:hover{
 
     background:#D97742;
@@ -265,10 +292,12 @@ main{
     transform:scale(1.05);
 }
 
+/* Posición de la flecha izquierda */
 .left{
     left:0;
 }
 
+/* Posición de la flecha derecha */
 .right{
     right:0;
 }
@@ -277,6 +306,7 @@ main{
    MENSAJE SIN RESULTADOS
 ========================== */
 
+/* Contenedor mostrado cuando no hay recomendaciones */
 .empty-state{
 
     text-align:center;
@@ -293,6 +323,7 @@ main{
     0 8px 20px rgba(0,0,0,.08);
 }
 
+/* Título del mensaje de estado vacío */
 .empty-state h3{
 
     color:#634334;

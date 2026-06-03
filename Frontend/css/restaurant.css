@@ -1,3 +1,8 @@
+/* ==========================
+   CONFIGURACIÓN GENERAL
+========================== */
+
+/* Reinicia los estilos por defecto del navegador */
 *{
     margin:0;
     padding:0;
@@ -5,13 +10,17 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+/* Configuración general del cuerpo de la página */
 body{
     background:#F4E9D8;
     min-height:100vh;
 }
 
-/* HEADER */
+/* ==========================
+   HEADER
+========================== */
 
+/* Barra superior de navegación */
 header{
 
     height:80px;
@@ -26,12 +35,14 @@ header{
     box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
+/* Tamaño del logo */
 .nombre-container img{
 
     width:180px;
     height:auto;
 }
 
+/* Contenedor de acciones del encabezado */
 .header-actions{
 
     margin-left:auto;
@@ -41,6 +52,7 @@ header{
     gap:20px;
 }
 
+/* Botón para cerrar sesión */
 .logout-btn{
 
     background:#3B2A21;
@@ -60,13 +72,17 @@ header{
     transition:.3s;
 }
 
+/* Efecto al pasar el cursor */
 .logout-btn:hover{
 
     background:#382f2a;
 }
 
-/* MAIN */
+/* ==========================
+   CONTENIDO PRINCIPAL
+========================== */
 
+/* Centra la tarjeta del restaurante */
 main{
 
     display:flex;
@@ -76,8 +92,11 @@ main{
     padding:50px;
 }
 
-/* CARD */
+/* ==========================
+   TARJETA DEL RESTAURANTE
+========================== */
 
+/* Contenedor principal de la información */
 .restaurant-box{
 
     width:950px;
@@ -96,13 +115,17 @@ main{
     overflow:hidden;
 }
 
+/* Área interna que contiene todos los datos */
 .restaurant-info{
 
     padding:40px;
 }
 
-/* TITULO */
+/* ==========================
+   TITULO
+========================== */
 
+/* Nombre del restaurante */
 .restaurant-info h2{
 
     color:#634334;
@@ -114,8 +137,11 @@ main{
     margin-bottom:15px;
 }
 
-/* RATING */
+/* ==========================
+   CALIFICACIÓN
+========================== */
 
+/* Muestra la puntuación del restaurante */
 .rating{
 
     color:#C99A2E;
@@ -127,8 +153,11 @@ main{
     margin-bottom:25px;
 }
 
-/* INFO */
+/* ==========================
+   INFORMACIÓN DEL RESTAURANTE
+========================== */
 
+/* Distribución de los datos en forma de cuadrícula */
 .details{
 
     display:grid;
@@ -143,6 +172,7 @@ main{
     margin-bottom:35px;
 }
 
+/* Tarjeta individual de cada dato */
 .details p{
 
     background:#FFF8F0;
@@ -158,6 +188,7 @@ main{
     line-height:1.5;
 }
 
+/* Etiquetas como Categoría Ciudad Zona etc */
 .details strong{
 
     display:block;
@@ -173,13 +204,17 @@ main{
     letter-spacing:.5px;
 }
 
+/* Hace que la descripción ocupe todo el ancho */
 .details p:last-child{
 
     grid-column:1 / -1;
 }
 
-/* BOTONES */
+/* ==========================
+   BOTONES
+========================== */
 
+/* Contenedor de botones de acción */
 .buttons{
 
     display:flex;
@@ -189,6 +224,7 @@ main{
     margin-top:10px;
 }
 
+/* Estilo base de los botones */
 .btn{
 
     display:flex;
@@ -210,6 +246,7 @@ main{
     transition:.3s;
 }
 
+/* Botón para regresar */
 #backBtn{
 
     background:#B85C38;
@@ -217,6 +254,7 @@ main{
     color:#F4E9D8;
 }
 
+/* Botón para calificar restaurante */
 #reviewBtn{
 
     background:#B85C38;
@@ -224,6 +262,7 @@ main{
     color:white;
 }
 
+/* Efecto al pasar el cursor sobre los botones */
 #backBtn:hover,
 #reviewBtn:hover{
 
@@ -232,38 +271,46 @@ main{
     transform:translateY(-2px);
 }
 
-/* RESPONSIVE */
+/* ==========================
+   DISEÑO RESPONSIVO
+========================== */
 
+/* Ajustes para pantallas pequeñas */
 @media(max-width:768px){
 
+    /* Reduce el espacio interno */
     .restaurant-info{
 
         padding:25px;
     }
 
+    /* Reduce el tamaño del título */
     .restaurant-info h2{
 
         font-size:32px;
     }
 
+    /* Cambia la cuadrícula a una sola columna */
     .details{
 
         grid-template-columns:1fr;
     }
 
+    /* Restablece el comportamiento de la descripción */
     .details p:last-child{
 
         grid-column:auto;
     }
 
+    /* Apila los botones verticalmente */
     .buttons{
 
         flex-direction:column;
     }
 
+    /* Hace que los botones ocupen todo el ancho */
     .btn{
 
         width:100%;
-        
     }
 }

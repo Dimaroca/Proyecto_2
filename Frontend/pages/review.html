@@ -2,22 +2,34 @@
 
 <html lang="es">
 <head>
+    <!-- Configuración de caracteres para soportar acentos y caracteres especiales -->
     <meta charset="UTF-8">
+
+    <!-- Permite que la página se adapte correctamente a diferentes dispositivos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Icono mostrado en la pestaña del navegador -->
     <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <!-- Título de la página -->
     <title>Rate - Throphinder</title>
+
+    <!-- Hoja de estilos de la página de reseñas -->
     <link rel="stylesheet" href="../css/review.css">
 </head>
 <body>
 
 <header>
- 
+
+    <!-- Contenedor del logo o nombre de la aplicación -->
     <div class="nombre-container">
         <img src="../assets/nombre.png" alt="ThropFinder">
     </div>
 
+    <!-- Contenedor de acciones del encabezado -->
     <div class="header-actions">
 
+        <!-- Botón para cerrar sesión -->
         <button id="logoutBtn" class="logout-btn">
             Cerrar sesión
         </button>
@@ -28,55 +40,68 @@
 
 <main>
 
-<div class="review-box">
+    <!-- Contenedor principal de la reseña -->
+    <div class="review-box">
 
-    <h2>Califica tu experiencia</h2>
+        <!-- Título principal -->
+        <h2>
+            Califica tu experiencia
+        </h2>
 
-    <h3 id="restaurantName">
-        Cargando restaurante...
-    </h3>
+        <!-- Nombre del restaurante cargado dinámicamente -->
+        <h3 id="restaurantName">
+            Cargando restaurante...
+        </h3>
 
-    <form id="reviewForm">
+        <!-- Formulario para enviar la reseña -->
+        <form id="reviewForm">
 
-        <label>
-            Calificación
-        </label>
+            <!-- Etiqueta para la calificación -->
+            <label>
+                Calificación
+            </label>
 
-        <div class="star-rating">
+            <!-- Sistema de estrellas para seleccionar la puntuación -->
+            <div class="star-rating">
 
-            <span class="star" data-value="1">★</span>
-            <span class="star" data-value="2">★</span>
-            <span class="star" data-value="3">★</span>
-            <span class="star" data-value="4">★</span>
-            <span class="star" data-value="5">★</span>
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
 
-        </div>
+            </div>
 
-        <input
-            type="hidden"
-            id="rating"
-            value="">
+            <!-- Campo oculto donde se almacena la calificación seleccionada -->
+            <input
+                type="hidden"
+                id="rating"
+                value="">
 
-        <label for="comment">
-            Comentario
-        </label>
+            <!-- Etiqueta para el comentario -->
+            <label for="comment">
+                Comentario
+            </label>
 
-        <textarea
-            id="comment"
-            rows="6"
-            placeholder="Describe tu experiencia">
-        </textarea>
+            <!-- Área de texto para escribir la reseña -->
+            <textarea
+                id="comment"
+                rows="6"
+                placeholder="Describe tu experiencia">
+            </textarea>
 
-        <button type="submit">
-            Enviar reseña
-        </button>
+            <!-- Botón para enviar la reseña -->
+            <button type="submit">
+                Enviar reseña
+            </button>
 
-    </form>
+        </form>
 
-</div>
+    </div>
 
 </main>
 
+<!-- Archivo JavaScript encargado de gestionar las reseñas -->
 <script src="../js/review.js"></script>
 
 </body>

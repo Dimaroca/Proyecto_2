@@ -2,22 +2,34 @@
 
 <html lang="es">
 <head>
+    <!-- Configuración de caracteres para soportar acentos y caracteres especiales -->
     <meta charset="UTF-8">
+
+    <!-- Permite que la página se adapte correctamente a dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Icono que aparece en la pestaña del navegador -->
     <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <!-- Título de la página -->
     <title>Restaurant - Throphinder</title>
+
+    <!-- Hoja de estilos de la página del restaurante -->
     <link rel="stylesheet" href="../css/restaurant.css">
 </head>
 <body>
 
 <header>
- 
+
+    <!-- Contenedor del logo o nombre de la aplicación -->
     <div class="nombre-container">
         <img src="../assets/nombre.png" alt="ThropFinder">
     </div>
 
+    <!-- Contenedor de acciones del encabezado -->
     <div class="header-actions">
 
+        <!-- Botón para cerrar sesión -->
         <button id="logoutBtn" class="logout-btn">
             Cerrar sesión
         </button>
@@ -28,84 +40,98 @@
 
 <main>
 
-<div class="restaurant-box">
+    <!-- Contenedor principal de la información del restaurante -->
+    <div class="restaurant-box">
 
-    <div class="restaurant-info">
+        <!-- Sección con los datos del restaurante -->
+        <div class="restaurant-info">
 
-        <h2 id="restaurantName">
-            Cargando...
-        </h2>
+            <!-- Nombre del restaurante cargado dinámicamente -->
+            <h2 id="restaurantName">
+                Cargando...
+            </h2>
 
-        <p
-            class="rating"
-            id="restaurantRating">
-        </p>
-
-        <div class="details">
-
-            <p>
-                <strong>Categoría:</strong>
-                <span id="restaurantCategory">
-                    Cargando...
-                </span>
+            <!-- Calificación del restaurante -->
+            <p
+                class="rating"
+                id="restaurantRating">
             </p>
 
-            <p>
-                <strong>Ciudad:</strong>
-                <span id="restaurantCity">
-                    Cargando...
-                </span>
-            </p>
+            <!-- Información detallada del restaurante -->
+            <div class="details">
 
-            <p>
-                <strong>Zona:</strong>
-                <span id="restaurantZone">
-                    Cargando...
-                </span>
-            </p>
+                <!-- Categoría del restaurante -->
+                <p>
+                    <strong>Categoría:</strong>
+                    <span id="restaurantCategory">
+                        Cargando...
+                    </span>
+                </p>
 
-            <p>
-                <strong>Ambiente:</strong>
-                <span id="restaurantEnvironment">
-                    Cargando...
-                </span>
-            </p>
+                <!-- Ciudad donde se encuentra -->
+                <p>
+                    <strong>Ciudad:</strong>
+                    <span id="restaurantCity">
+                        Cargando...
+                    </span>
+                </p>
 
-            <p>
-                <strong>Descripción:</strong>
-                <span id="restaurantDescription">
-                    Cargando...
-                </span>
-            </p>
+                <!-- Zona o ubicación específica -->
+                <p>
+                    <strong>Zona:</strong>
+                    <span id="restaurantZone">
+                        Cargando...
+                    </span>
+                </p>
 
-        </div>
+                <!-- Tipo de ambiente ofrecido -->
+                <p>
+                    <strong>Ambiente:</strong>
+                    <span id="restaurantEnvironment">
+                        Cargando...
+                    </span>
+                </p>
 
-        <div class="buttons">
+                <!-- Descripción general del restaurante -->
+                <p>
+                    <strong>Descripción:</strong>
+                    <span id="restaurantDescription">
+                        Cargando...
+                    </span>
+                </p>
 
-            <a
-                id="backBtn"
-                class="btn">
+            </div>
 
-                Regresar
+            <!-- Contenedor de botones de acción -->
+            <div class="buttons">
 
-            </a>
+                <!-- Botón para regresar a la página anterior -->
+                <a
+                    id="backBtn"
+                    class="btn">
 
-            <a
-                id="reviewBtn"
-                class="btn">
+                    Regresar
 
-                Calificar restaurante
+                </a>
 
-            </a>
+                <!-- Botón para calificar el restaurante -->
+                <a
+                    id="reviewBtn"
+                    class="btn">
+
+                    Calificar restaurante
+
+                </a>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
-
 </main>
 
+<!-- Archivo JavaScript encargado de cargar y gestionar la información del restaurante -->
 <script src="../js/restaurant.js"></script>
 
 </body>

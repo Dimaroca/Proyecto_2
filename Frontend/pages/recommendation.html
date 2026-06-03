@@ -2,65 +2,86 @@
 
 <html lang="es">
 <head>
+    <!-- Configuración de caracteres para soportar acentos y caracteres especiales -->
     <meta charset="UTF-8">
+
+    <!-- Permite que la página se adapte correctamente a dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Icono que aparece en la pestaña del navegador -->
     <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <!-- Título mostrado en la pestaña del navegador -->
     <title>Reccommendations - Throphinder</title>
+
+    <!-- Hoja de estilos de la página de recomendaciones -->
     <link rel="stylesheet" href="../css/recommendation.css">
 </head>
 <body>
 
 <header>
+
+    <!-- Contenedor del logo o nombre de la aplicación -->
     <div class="nombre-container">
         <img src="../assets/nombre.png" alt="ThropFinder">
     </div>
 
+    <!-- Contenedor de acciones del encabezado -->
     <div class="header-actions">
 
+        <!-- Botón para cerrar sesión -->
         <button id="logoutBtn" class="logout-btn">
             Cerrar sesión
         </button>
 
     </div>
+
 </header>
 
 <main>
 
-<section class="section">
+    <!-- Sección de recomendaciones personalizadas -->
+    <section class="section">
 
-    <h2>Recomendados para ti</h2>
+        <h2>
+            Recomendados para ti
+        </h2>
 
-    <div class="slider-container">
+        <div class="slider-container">
 
-        <button
-            class="arrow left"
-            data-slider="recommendedSlider"
-            data-direction="-300">
+            <!-- Flecha para desplazarse hacia la izquierda -->
+            <button
+                class="arrow left"
+                data-slider="recommendedSlider"
+                data-direction="-300">
 
-            &#10094;
+                &#10094;
 
-        </button>
+            </button>
 
-        <div
-            class="slider"
-            id="recommendedSlider">
+            <!-- Contenedor donde se cargan dinámicamente los restaurantes recomendados -->
+            <div
+                class="slider"
+                id="recommendedSlider">
+            </div>
+
+            <!-- Flecha para desplazarse hacia la derecha -->
+            <button
+                class="arrow right"
+                data-slider="recommendedSlider"
+                data-direction="300">
+
+                &#10095;
+
+            </button>
+
         </div>
 
-        <button
-            class="arrow right"
-            data-slider="recommendedSlider"
-            data-direction="300">
-
-            &#10095;
-
-        </button>
-
-    </div>
-
-</section>
+    </section>
 
 </main>
 
+<!-- Archivo JavaScript encargado de cargar y controlar las recomendaciones -->
 <script src="../js/recommendation.js"></script>
 
 </body>

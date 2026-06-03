@@ -1,3 +1,4 @@
+/* Reinicia los estilos por defecto de todos los elementos */
 *{
     margin:0;
     padding:0;
@@ -5,6 +6,7 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+/* Configuración general del cuerpo de la página */
 body{
     background:#F4E9D8;
     min-height:100vh;
@@ -14,6 +16,7 @@ body{
    HEADER
 ========================== */
 
+/* Barra superior de navegación */
 header{
 
     height:80px;
@@ -28,12 +31,14 @@ header{
     box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
+/* Tamaño del logo */
 .nombre-container img{
 
     width:180px;
     height:auto;
 }
 
+/* Contenedor de acciones del encabezado */
 .header-actions{
 
     margin-left:auto;
@@ -43,6 +48,7 @@ header{
     gap:20px;
 }
 
+/* Botón para cerrar sesión */
 .logout-btn{
 
     background:#3B2A21;
@@ -62,6 +68,7 @@ header{
     transition:.3s;
 }
 
+/* Efecto al pasar el cursor sobre el botón */
 .logout-btn:hover{
 
     background:#382f2a;
@@ -71,6 +78,7 @@ header{
    MAIN
 ========================== */
 
+/* Área principal de contenido */
 main{
     padding:40px;
 }
@@ -79,6 +87,7 @@ main{
    HERO
 ========================== */
 
+/* Sección principal de bienvenida */
 .hero{
 
     background:
@@ -89,8 +98,9 @@ main{
     );
 
     min-height:350px;
-    width: 45%;
-    margin-left: 26%;
+    width:45%;
+    margin-left:26%;
+
     border-radius:25px;
 
     display:flex;
@@ -100,6 +110,7 @@ main{
     margin-bottom:60px;
 }
 
+/* Contenido interno de la sección principal */
 .hero-content{
 
     text-align:center;
@@ -109,6 +120,7 @@ main{
     max-width:500px;
 }
 
+/* Título principal */
 .hero-content h1{
 
     font-size:48px;
@@ -116,6 +128,7 @@ main{
     margin-bottom:20px;
 }
 
+/* Descripción principal */
 .hero-content p{
 
     font-size:18px;
@@ -125,6 +138,7 @@ main{
     line-height:1.6;
 }
 
+/* Botón para buscar recomendaciones */
 .recommend-btn{
 
     background:#F4E9D8;
@@ -144,6 +158,7 @@ main{
     transition:.3s;
 }
 
+/* Animación del botón al pasar el cursor */
 .recommend-btn:hover{
 
     transform:translateY(-2px);
@@ -153,10 +168,12 @@ main{
    SECTIONS
 ========================== */
 
+/* Separación entre secciones */
 .section{
     margin-bottom:70px;
 }
 
+/* Títulos de las secciones */
 .section h2{
 
     color:#B85C38;
@@ -170,6 +187,7 @@ main{
    SLIDER
 ========================== */
 
+/* Contenedor principal del carrusel */
 .slider-container{
 
     position:relative;
@@ -178,6 +196,7 @@ main{
     align-items:center;
 }
 
+/* Área que contiene las tarjetas */
 .slider{
 
     display:flex;
@@ -195,6 +214,7 @@ main{
    CARDS
 ========================== */
 
+/* Tarjeta individual de restaurante */
 .restaurant-card{
 
     width:280px;
@@ -219,12 +239,13 @@ main{
     flex-direction:column;
 }
 
+/* Efecto al pasar el cursor sobre una tarjeta */
 .restaurant-card:hover{
 
-    transform:
-    translateY(-8px);
+    transform:translateY(-8px);
 }
 
+/* Nombre del restaurante */
 .restaurant-name{
 
     color:#634334;
@@ -234,9 +255,9 @@ main{
     font-weight:700;
 
     line-height:1.3;
-
 }
 
+/* Categoría del restaurante */
 .restaurant-category{
 
     color:#B85C38;
@@ -246,6 +267,7 @@ main{
     margin-bottom:20px;
 }
 
+/* Contenedor de la calificación */
 .restaurant-rating{
 
     margin-top:auto;
@@ -263,6 +285,7 @@ main{
     gap:10px;
 }
 
+/* Valor numérico de la calificación */
 .rating-number{
 
     color:#634334;
@@ -274,6 +297,7 @@ main{
    FLECHAS
 ========================== */
 
+/* Botones de navegación del slider */
 .arrow{
 
     position:absolute;
@@ -296,15 +320,18 @@ main{
     z-index:10;
 }
 
+/* Efecto al pasar el cursor sobre las flechas */
 .arrow:hover{
 
     background:#D97742;
 }
 
+/* Posición de la flecha izquierda */
 .left{
     left:0;
 }
 
+/* Posición de la flecha derecha */
 .right{
     right:0;
 }

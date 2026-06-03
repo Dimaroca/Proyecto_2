@@ -1,38 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Configuración de caracteres para soportar tildes y caracteres especiales -->
     <meta charset="UTF-8">
+
+    <!-- Hace que la página sea responsive en dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Icono que aparece en la pestaña del navegador -->
     <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <!-- Título mostrado en la pestaña del navegador -->
     <title>Login - Throphinder</title>
+
+    <!-- Hoja de estilos principal para la página de login -->
     <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
 
+    <!-- Contenedor principal que agrupa toda la pantalla -->
     <div class="container">
+
+        <!-- Sección destinada a mostrar una imagen decorativa o de fondo -->
         <div class="picture"></div>
+
+        <!-- Tarjeta que contiene el formulario de inicio de sesión -->
         <div class="card">
+
+            <!-- Contenedor del contenido del login -->
             <div class="login">
+
+                <!-- Área donde se muestra el logo o nombre de la aplicación -->
                 <div class="nombre-container">
                     <img src="../assets/nombre.png" alt="Throphinder Logo">
                 </div>
 
+                <!-- Formulario de inicio de sesión -->
                 <form>
+
+                    <!-- Campo para ingresar el correo electrónico -->
                     <input type="email" placeholder="Correo electrónico" required>
 
+                    <!-- Campo para ingresar la contraseña -->
                     <input type="password" placeholder="Contraseña" required>
 
-                <button type="submit">Iniciar Sesión</button>
+                    <!-- Botón para enviar el formulario -->
+                    <button type="submit">Iniciar Sesión</button>
+
                 </form>
 
+                <!-- Texto para redirigir al usuario al registro -->
                 <p class="register">
                     ¿No tienes cuenta?
                     <a href="register.html">Regístrate</a>
                 </p>
+
             </div>
         </div>
 
     </div>
+
+    <!-- Archivo JavaScript encargado de la lógica del login -->
     <script src="../js/login.js"></script>
+
 </body>
 </html>

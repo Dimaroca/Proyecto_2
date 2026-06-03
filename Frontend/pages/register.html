@@ -1,64 +1,105 @@
-<!-- Contenedor principal -->
-<div class="container">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de caracteres para soportar acentos y caracteres especiales -->
+    <meta charset="UTF-8">
 
-    <!-- Tarjeta de registro -->
-    <div class="card">
+    <!-- Permite que la página sea responsive en diferentes dispositivos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Caja que contiene el formulario -->
-        <div class="register-box">
+    <!-- Icono mostrado en la pestaña del navegador -->
+    <link rel="icon" type="image/png" href="../assets/logo.png">
 
-            <!-- Logo de la aplicación -->
-            <div class="nombre-container">
-                <img src="../assets/nombre.png" alt="Throphinder Logo">
+    <!-- Título de la página -->
+    <title>Register - Throphinder</title>
+
+    <!-- Hoja de estilos de la página de registro -->
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+
+        <!-- Tarjeta que contiene el formulario de registro -->
+        <div class="card">
+
+            <!-- Caja principal del registro -->
+            <div class="register-box">
+
+                <!-- Logo de la aplicación -->
+                <div class="nombre-container">
+                    <img src="../assets/nombre.png" alt="Throphinder Logo">
+                </div>
+
+                <!-- Título principal -->
+                <h1>
+                    Crear cuenta
+                </h1>
+
+                <!-- Texto descriptivo -->
+                <p class="subtitle">
+                    Regístrate para recibir recomendaciones
+                </p>
+
+                <!-- Formulario de registro -->
+                <form>
+
+                    <!-- Campo para ingresar el nombre completo -->
+                    <input
+                        type="text"
+                        placeholder="Nombre completo"
+                        required>
+
+                    <!-- Campo para ingresar el correo electrónico -->
+                    <input
+                        type="email"
+                        placeholder="Correo electrónico"
+                        required>
+
+                    <!-- Campo para ingresar la contraseña -->
+                    <input
+                        type="password"
+                        placeholder="Contraseña"
+                        required>
+
+                    <!-- Campo para confirmar la contraseña -->
+                    <input
+                        type="password"
+                        placeholder="Confirmar contraseña"
+                        required>
+
+                    <!-- Lista desplegable de ciudades -->
+                    <select id="citySelect" required>
+
+                        <!-- Opción inicial mostrada por defecto -->
+                        <option value="" disabled selected>
+                            Elija su ciudad
+                        </option>
+
+                    </select>
+
+                    <!-- Botón para enviar el formulario -->
+                    <button type="submit">
+                        Registrarse
+                    </button>
+
+                </form>
+
+                <!-- Enlace para usuarios que ya poseen una cuenta -->
+                <p class="login">
+                    ¿Ya tienes cuenta?
+                    <a href="login.html">Inicia sesión</a>
+                </p>
+
             </div>
-
-            <!-- Título principal -->
-            <h1>Crear cuenta</h1>
-
-            <!-- Texto descriptivo -->
-            <p class="subtitle">
-                Regístrate para recibir recomendaciones
-            </p>
-
-            <!-- Formulario de registro -->
-            <form>
-
-                <!-- Nombre completo -->
-                <input type="text" placeholder="Nombre completo" required>
-
-                <!-- Correo electrónico -->
-                <input type="email" placeholder="Correo electrónico" required>
-
-                <!-- Contraseña -->
-                <input type="password" placeholder="Contraseña" required>
-
-                <!-- Confirmación de contraseña -->
-                <input type="password" placeholder="Confirmar contraseña" required>
-
-                <!-- Selección de ciudad -->
-                <select id="citySelect" required>
-
-                    <option value="" disabled selected>
-                        Elija su ciudad
-                    </option>
-
-                </select>
-
-                <!-- Botón de registro -->
-                <button type="submit">
-                    Registrarse
-                </button>
-
-            </form>
-
-            <!-- Enlace para usuarios registrados -->
-            <p class="login">
-                ¿Ya tienes cuenta?
-                <a href="login.html">Inicia sesión</a>
-            </p>
 
         </div>
 
     </div>
 
-</div>
+    <!-- Archivo JavaScript encargado de la lógica del registro -->
+    <script src="../js/register.js"></script>
+
+</body>
+</html>

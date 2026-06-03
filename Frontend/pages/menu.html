@@ -2,22 +2,34 @@
 
 <html lang="es">
 <head>
+    <!-- Configuración de caracteres para soportar acentos y caracteres especiales -->
     <meta charset="UTF-8">
+
+    <!-- Permite que la página se adapte correctamente a dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Icono que se muestra en la pestaña del navegador -->
     <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <!-- Título de la página -->
     <title>Menu - Throphinder</title>
+
+    <!-- Hoja de estilos principal del menú -->
     <link rel="stylesheet" href="../css/menu.css">
 </head>
 <body>
 
 <header>
- 
+
+    <!-- Contenedor del logo o nombre de la aplicación -->
     <div class="nombre-container">
         <img src="../assets/nombre.png" alt="ThropFinder">
     </div>
 
+    <!-- Contenedor de acciones del encabezado -->
     <div class="header-actions">
 
+        <!-- Botón para cerrar sesión -->
         <button id="logoutBtn" class="logout-btn">
             Cerrar sesión
         </button>
@@ -28,18 +40,22 @@
 
 <main>
 
+    <!-- Sección principal de bienvenida -->
     <section class="hero">
 
         <div class="hero-content">
 
+            <!-- Título principal -->
             <h1>
                 Descubre tu próximo restaurante favorito
             </h1>
 
+            <!-- Descripción breve de la aplicación -->
             <p>
                 Explora restaurantes, descubre nuevos lugares y encuentra experiencias gastronómicas únicas.
             </p>
 
+            <!-- Botón para iniciar la búsqueda de recomendaciones -->
             <button class="recommend-btn">
                 Buscar recomendaciones
             </button>
@@ -48,6 +64,7 @@
 
     </section>
 
+    <!-- Sección de restaurantes mejor calificados -->
     <section class="section">
 
         <h2>
@@ -56,13 +73,16 @@
 
         <div class="slider-container">
 
+            <!-- Flecha para desplazarse hacia la izquierda -->
             <button class="arrow left" id="prevBtn">
                 &#10094;
             </button>
 
+            <!-- Contenedor donde se cargan dinámicamente las tarjetas -->
             <div class="slider" id="mainSlider">
             </div>
 
+            <!-- Flecha para desplazarse hacia la derecha -->
             <button class="arrow right" id="nextBtn">
                 &#10095;
             </button>
@@ -71,6 +91,7 @@
 
     </section>
 
+    <!-- Sección de restaurantes cercanos a la ubicación del usuario -->
     <section class="section">
 
         <h2 id="cityTitle">
@@ -79,13 +100,16 @@
 
         <div class="slider-container">
 
+            <!-- Flecha izquierda del slider de ubicación -->
             <button class="arrow left" id="prevCityBtn">
                 &#10094;
             </button>
 
+            <!-- Contenedor donde se cargan los restaurantes cercanos -->
             <div class="slider" id="citySlider">
             </div>
 
+            <!-- Flecha derecha del slider de ubicación -->
             <button class="arrow right" id="nextCityBtn">
                 &#10095;
             </button>
@@ -96,6 +120,7 @@
 
 </main>
 
+<!-- Archivo JavaScript encargado de la lógica del menú y sliders -->
 <script src="../js/menu.js"></script>
 
 </body>
