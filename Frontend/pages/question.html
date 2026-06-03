@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preferencias - Trophinder</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <title>Preferencias - Throphinder</title>
     <link rel="stylesheet" href="../css/question.css">
 </head>
 <body>
 
     <header>
-        <h1>Trophinder</h1>
+
+        <div class="nombre-container">
+            <img src="../assets/nombre.png" alt="ThropFinder">
+        </div>
+
+        <div class="header-actions">
+
+            <button id="logoutBtn" class="logout-btn">
+                Cerrar sesión
+            </button>
+
+        </div>
+
     </header>
     <main>
         <div class="form-container">
 
             <div class="form-header">
-                <h1>Preferencias de restaurantes</h1>
-                <p>Responde estas preguntas para recomendarte mejores opciones.</p>
+                <h1>Personalicemos tus recomoendaciones</h1>
+                <p>Responde estas preguntas para recomendarte mejores opciones</p>
             </div>
 
             <form>
 
-```
                 <div class="question-card">
                     <h3>1. ¿Qué tipo de comida prefieres?</h3>
 
@@ -59,9 +71,16 @@
                         step="0.5"
                         value="4">
 
-                    <p>
-                        Calificación mínima:
-                        <span id="ratingValue">4</span> ⭐
+                    <p class="rating-display">
+
+                        <span id="ratingStars">
+                            ★★★★☆
+                        </span>
+
+                        <span id="ratingValue">
+                            4.0
+                        </span>
+
                     </p>
                 </div>
 
@@ -88,7 +107,6 @@
                 <button type="submit">
                     Continuar
                 </button>
-                ```
 
             </form>
 

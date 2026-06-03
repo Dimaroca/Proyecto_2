@@ -1,6 +1,25 @@
 const arrows =
 document.querySelectorAll(".arrow");
 
+/* ==========================
+   ESTRELLAS
+========================== */
+
+function generateStars(rating){
+
+    const rounded =
+        Math.round(rating);
+
+    return (
+        "★".repeat(rounded) +
+        "☆".repeat(5 - rounded)
+    );
+}
+
+/* ==========================
+   SLIDERS
+========================== */
+
 arrows.forEach(arrow => {
 
     arrow.addEventListener(
@@ -20,13 +39,19 @@ arrows.forEach(arrow => {
                     sliderId
                 );
 
-            if (direction > 0) {
+            if(!slider ||
+               !slider.firstElementChild){
+
+                return;
+            }
+
+            if(direction > 0){
 
                 slider.appendChild(
                     slider.firstElementChild
                 );
 
-            } else {
+            }else{
 
                 slider.insertBefore(
                     slider.lastElementChild,
@@ -38,7 +63,11 @@ arrows.forEach(arrow => {
 
 });
 
-function createCard(restaurant) {
+/* ==========================
+   CREAR TARJETA
+========================== */
+
+function createCard(restaurant){
 
     const card =
         document.createElement("div");
@@ -47,27 +76,58 @@ function createCard(restaurant) {
         "restaurant-card";
 
     card.innerHTML = `
-        <h3>${restaurant.name}</h3>
-        <p>${restaurant.category}</p>
-        <span>⭐ ${restaurant.rating.toFixed(1)}</span>
+
+        <div class="restaurant-name">
+            ${restaurant.name}
+        </div>
+
+        <div class="restaurant-category">
+            ${restaurant.category}
+        </div>
+
+        <div class="restaurant-rating">
+
+            <span class="stars">
+                ${generateStars(
+                    restaurant.rating
+                )}
+            </span>
+
+            <span class="rating-number">
+                ${restaurant.rating.toFixed(1)}
+            </span>
+
+        </div>
+
     `;
 
-    card.addEventListener("click", () => {
+    card.addEventListener(
+        "click",
+        () => {
 
-        window.location.href =
-            `restaurant.html?id=${restaurant.id}&from=recommendation`;
-    });
+            window.location.href =
+                `restaurant.html?id=${restaurant.id}&from=recommendation`;
+        }
+    );
 
     return card;
 }
 
-async function loadRecommendations() {
+/* ==========================
+   CARGAR RECOMENDACIONES
+========================== */
+
+async function loadRecommendations(){
 
     const food =
-        sessionStorage.getItem("food");
+        sessionStorage.getItem(
+            "food"
+        );
 
     const budget =
-        sessionStorage.getItem("budget");
+        sessionStorage.getItem(
+            "budget"
+        );
 
     const environment =
         sessionStorage.getItem(
@@ -91,20 +151,21 @@ async function loadRecommendations() {
             "userId"
         ) || "";
 
-    try {
+    try{
 
         const response =
             await fetch(
                 "http://localhost:4567/api/recomendaciones",
                 {
-                    method: "POST",
+                    method:"POST",
 
-                    headers: {
+                    headers:{
                         "Content-Type":
                         "application/json"
                     },
 
-                    body: JSON.stringify({
+                    body:JSON.stringify({
+
                         userId,
                         food,
                         budget,
@@ -114,6 +175,13 @@ async function loadRecommendations() {
                     })
                 }
             );
+
+        if(!response.ok){
+
+            throw new Error(
+                "No se pudieron cargar las recomendaciones"
+            );
+        }
 
         const restaurants =
             await response.json();
@@ -125,6 +193,27 @@ async function loadRecommendations() {
 
         slider.innerHTML = "";
 
+        if(restaurants.length === 0){
+
+            slider.innerHTML = `
+
+                <div class="empty-state">
+
+                    <h3>
+                        No encontramos resultados
+                    </h3>
+
+                    <p>
+                        Intenta modificar tus preferencias.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+        }
+
         restaurants.forEach(r => {
 
             slider.appendChild(
@@ -132,10 +221,18 @@ async function loadRecommendations() {
             );
         });
 
-    } catch(error) {
+    }
+    catch(error){
 
-        console.error(error);
+        console.error(
+            "Error cargando recomendaciones:",
+            error
+        );
     }
 }
+
+/* ==========================
+   INICIO
+========================== */
 
 loadRecommendations();

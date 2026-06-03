@@ -17,6 +17,13 @@ async function loadRestaurant() {
                 `http://localhost:4567/api/restaurante/${restaurantId}`
             );
 
+        if(!response.ok){
+
+            throw new Error(
+                "Restaurante no encontrado"
+            );
+        }
+
         const restaurant =
             await response.json();
 
@@ -28,56 +35,120 @@ async function loadRestaurant() {
     } catch(error) {
 
         console.error(error);
+
+        document.getElementById(
+            "restaurantName"
+        ).textContent =
+            "Error cargando restaurante";
     }
 }
 
+const stars =
+    document.querySelectorAll(".star");
+
+const ratingInput =
+    document.getElementById("rating");
+
+stars.forEach(star => {
+
+    star.addEventListener(
+        "click",
+        () => {
+
+            const value =
+                Number(
+                    star.dataset.value
+                );
+
+            ratingInput.value =
+                value;
+
+            stars.forEach(s => {
+
+                if(
+                    Number(
+                        s.dataset.value
+                    ) <= value
+                ){
+
+                    s.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    s.classList.remove(
+                        "active"
+                    );
+                }
+            });
+        }
+    );
+});
+
 document
-    .getElementById("reviewForm")
-    .addEventListener(
-        "submit",
-        async function(e){
+.getElementById("reviewForm")
+.addEventListener(
+    "submit",
+    async function(e){
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const rating =
-                parseInt(
-                    document.getElementById(
-                        "rating"
-                    ).value
-                );
+        const rating =
+            parseInt(
+                document.getElementById(
+                    "rating"
+                ).value
+            );
 
-            const userId =
-                sessionStorage.getItem(
-                    "userId"
-                );
+        const comment =
+            document.getElementById(
+                "comment"
+            ).value;
 
-            try {
+        const userId =
+            sessionStorage.getItem(
+                "userId"
+            );
 
-                await fetch(
-                    "http://localhost:4567/api/review",
-                    {
-                        method: "POST",
+        try {
 
-                        headers: {
-                            "Content-Type":
-                            "application/json"
-                        },
+            await fetch(
+                "http://localhost:4567/api/review",
+                {
+                    method:"POST",
 
-                        body: JSON.stringify({
-                            userId,
-                            rating
-                        })
-                    }
-                );
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
 
-            } catch(error) {
+                    body:JSON.stringify({
 
-                console.error(error);
-            }
+                        userId,
+                        rating,
+                        comment
+                    })
+                }
+            );
+
+            alert(
+                "Reseña enviada correctamente"
+            );
 
             window.location.href =
                 "menu.html";
+
         }
-    );
+        catch(error){
+
+            console.error(error);
+
+            alert(
+                "No se pudo enviar la reseña"
+            );
+        }
+    }
+);
 
 loadRestaurant();

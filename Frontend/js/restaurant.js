@@ -5,6 +5,7 @@ const from = params.get("from");
 
 const backBtn = document.getElementById("backBtn");
 const reviewBtn = document.getElementById("reviewBtn");
+const logoutBtn = document.getElementById("logoutBtn");
 
 if (from === "recommendation") {
 
@@ -19,6 +20,28 @@ if (from === "recommendation") {
 
     reviewBtn.href =
         `review.html?id=${restaurantId}&from=menu`;
+}
+
+if(logoutBtn){
+
+    logoutBtn.addEventListener("click", () => {
+
+        sessionStorage.clear();
+
+        window.location.href =
+            "login.html";
+    });
+}
+
+function generateStars(rating){
+
+    const rounded =
+        Math.round(rating);
+
+    return (
+        "★".repeat(rounded) +
+        "☆".repeat(5 - rounded)
+    );
 }
 
 async function loadRestaurant() {
@@ -40,6 +63,7 @@ async function loadRestaurant() {
         );
 
         if (!response.ok) {
+
             throw new Error(
                 "Restaurante no encontrado"
             );
@@ -53,10 +77,15 @@ async function loadRestaurant() {
         ).textContent =
             restaurant.name;
 
+        const stars =
+            generateStars(
+                restaurant.rating
+            );
+
         document.getElementById(
             "restaurantRating"
         ).textContent =
-            `⭐ ${restaurant.rating.toFixed(1)}`;
+            `${stars} ${restaurant.rating.toFixed(1)}`;
 
         document.getElementById(
             "restaurantCategory"

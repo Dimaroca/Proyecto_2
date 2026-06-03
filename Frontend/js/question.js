@@ -1,16 +1,51 @@
 const form = document.querySelector("form");
 
-const ratingSlider =
-    document.getElementById("minRating");
+const rating = document.getElementById("minRating");
+const ratingValue = document.getElementById("ratingValue");
+const ratingStars = document.getElementById("ratingStars");
 
-const ratingValue =
-    document.getElementById("ratingValue");
+function updateRating() {
 
-ratingSlider.addEventListener("input", () => {
+    const value = parseFloat(rating.value);
 
-    ratingValue.textContent =
-        ratingSlider.value;
-});
+    ratingValue.textContent = value.toFixed(1);
+
+    const fullStars = Math.floor(value);
+    const emptyStars = 5 - fullStars;
+
+    ratingStars.textContent =
+        "★".repeat(fullStars) +
+        "☆".repeat(emptyStars);
+}
+
+rating.addEventListener(
+    "input",
+    updateRating
+);
+
+updateRating();
+
+/* ==========================
+   CERRAR SESIÓN
+========================== */
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", () => {
+
+        sessionStorage.clear();
+
+        window.location.href =
+            "login.html";
+    });
+}
+
+/* ==========================
+   FORMULARIO
+========================== */
 
 form.addEventListener(
     "submit",
@@ -34,9 +69,7 @@ form.addEventListener(
             )?.value;
 
         const minRating =
-            parseFloat(
-                ratingSlider.value
-            );
+            parseFloat(rating.value);
 
         const distance =
             document.getElementById(
@@ -65,30 +98,38 @@ form.addEventListener(
 
             try {
 
-                await fetch(
-                    "http://localhost:4567/api/preferencias",
-                    {
-                        method: "POST",
+                const response =
+                    await fetch(
+                        "http://localhost:4567/api/preferencias",
+                        {
+                            method: "POST",
 
-                        headers: {
-                            "Content-Type":
-                            "application/json"
-                        },
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
 
-                        body: JSON.stringify({
-                            userId,
-                            food,
-                            budget,
-                            environment,
-                            minRating,
-                            distance
-                        })
-                    }
-                );
+                            body: JSON.stringify({
+                                userId,
+                                food,
+                                budget,
+                                environment,
+                                minRating,
+                                distance
+                            })
+                        }
+                    );
 
-            } catch(error) {
+                if (!response.ok) {
 
-                console.warn(
+                    throw new Error(
+                        "Error al guardar preferencias"
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(
                     "No se pudieron guardar preferencias:",
                     error
                 );
