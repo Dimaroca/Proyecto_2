@@ -137,17 +137,6 @@ async function loadRestaurant() {
         ).textContent =
             restaurant.zone || "No disponible";
 
-        // Muestra el ambiente del restaurante
-        document.getElementById(
-            "restaurantEnvironment"
-        ).textContent =
-            restaurant.environment || "No disponible";
-
-        // Muestra la descripción del restaurante
-        document.getElementById(
-            "restaurantDescription"
-        ).textContent =
-            restaurant.description || "No disponible";
 
     } catch (error) {
 
